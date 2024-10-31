@@ -9,7 +9,7 @@ function AuthProvider({ children }) {
     async function Login(email, senha) {
 
         if (email != "" && senha != "") {
-            await fetch('https://fakestoreapi.com/auth/login', {
+            await fetch('', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
