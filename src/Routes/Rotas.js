@@ -6,6 +6,9 @@ import { useContext } from 'react';
 import { AuthContext } from '../Context/AuthContext';
 
 import Home from '../Pages/Home';
+import Consultas from '../Pages/Consultas';
+import Agendamento from '../Pages/Agendamento';
+
 
 
 const Tab = createBottomTabNavigator();
@@ -14,9 +17,9 @@ export default function Rotas() {
 
     const { logado } = useContext(AuthContext);
 
-    if (!logado) {
-        return (<Login />)
-    }
+    // if (!logado) {
+    //     return (<Login />)
+    // }
 
     return (
         <NavigationContainer>
@@ -36,6 +39,24 @@ export default function Rotas() {
                     options={{
                         tabBarIcon: ({ color, size }) => (
                             <MaterialCommunityIcons name="home" color={color} size={size} />
+                        ),
+                    }}
+                />
+                <Tab.Screen
+                    name="Consultas"
+                    component={Consultas}
+                    options={{
+                        tabBarIcon: ({ color, size }) => (
+                            <MaterialCommunityIcons name="map" color={color} size={size} />
+                        ),
+                    }}
+                />
+                <Tab.Screen
+                    name="Agendamento"
+                    component={Agendamento}
+                    options={{
+                        tabBarIcon: ({ color, size }) => (
+                            <MaterialCommunityIcons name="map" color={color} size={size} />
                         ),
                     }}
                 />
