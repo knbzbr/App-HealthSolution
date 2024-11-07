@@ -1,6 +1,6 @@
 import React from 'react'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Text, View } from 'react-native'
+import { View,  StyleSheet } from 'react-native'
 
 export default function Consultas() {
   return (
@@ -13,4 +13,13 @@ export default function Consultas() {
     </ScrollView >
   )
 }
+
+const css = StyleSheet.create({
+    container: {
+        flexGrow: 1,
+        backgroundColor: " #F4F4F4",
+        alignItems: "center",
+    }
+    
+})
 
