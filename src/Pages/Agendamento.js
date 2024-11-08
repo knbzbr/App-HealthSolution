@@ -6,11 +6,10 @@ const lista = [
         data: [
             {
                 id: 1,
-                imagem: require("../assets/psico.jpg"),
+                imagem: require("../../assets/psico.jpg"),
                 nomeProfissional: "Dra.Sandra",
                 profissao: "Psicóloga"
             },
-            
         ],
     }
 ]
@@ -18,17 +17,7 @@ const lista = [
 export default function Agendamento() {
     return (
         <View style={styles.container}>
-                <SectionList
-                    sections={lista}
-                    keyExtractor={(item, index) => item + index}
-                    renderItem={({ item }) => (
-                        <OnibusLista nomeProfissional={item.nomeProfissional} profissao={item.profissao} imagem={item.imagem} />
-                    )}
-                    renderSectionHeader={({ section: { title } }) => (
-                        <Text style={styles.titleHeader}>{title}</Text>
-                    )}
-                    numCollums={2}
-                />
+            <Text>OIIIIII</Text>
         </View>
     )
 }
