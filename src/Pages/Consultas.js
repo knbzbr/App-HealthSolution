@@ -1,6 +1,6 @@
 import React from 'react'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { View,  StyleSheet } from 'react-native'
+import { View,  StyleSheet, ScrollView, TouchableOpacity } from 'react-native'
 
 export default function Consultas() {
   return (
