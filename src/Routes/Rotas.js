@@ -7,7 +7,7 @@ import { AuthContext } from '../Context/AuthContext';
 
 import Home from '../Pages/Home';
 import Consultas from '../Pages/Consultas';
-import Login from '../Pages/Login';
+
 
 
 

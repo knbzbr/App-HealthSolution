@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <View>
         <View style={css.header}>
-            <Image style={css.logo} source={require("../assets/LogoHealthSolutions.png")} />
+            <Image style={css.logo} source={require("../../assets/LogoHealthSolutions.png")} />
             <Text>Bem-Vindo</Text>
         </View>
         <View style={css.body}>
