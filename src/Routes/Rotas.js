@@ -7,7 +7,8 @@ import { AuthContext } from '../Context/AuthContext';
 
 import Home from '../Pages/Home';
 import Consultas from '../Pages/Consultas';
-import Login from '../Pages/Login';
+import Agendamento from '../Pages/Agendamento';
+import Perfil from '../Pages/Perfil';
 
 
 
@@ -17,9 +18,9 @@ export default function Rotas() {
 
     const { logado } = useContext(AuthContext);
 
-    if (!logado) {
-        return (<Login />)
-    }
+    // if (!logado) {
+    //     return (<Login />)
+    // }
 
     return (
         <NavigationContainer>
@@ -38,7 +39,7 @@ export default function Rotas() {
                     component={Home}
                     options={{
                         tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="home" color={color} size={size} />
+                            <MaterialCommunityIcons name="home-outline" color={"white"} size={32} />
                         ),
                     }}
                 />
@@ -48,6 +49,24 @@ export default function Rotas() {
                     options={{
                         tabBarIcon: ({ color, size }) => (
                             <MaterialCommunityIcons name="map" color={color} size={size} />
+                        ),
+                    }}
+                />
+                <Tab.Screen
+                    name="Agendamento"
+                    component={Agendamento}
+                    options={{
+                        tabBarIcon: ({ color, size }) => (
+                            <MaterialCommunityIcons name="calendar" color={"white"} size={32} />
+                        ),
+                    }}
+                />
+                  <Tab.Screen
+                    name="Perfil"
+                    component={Perfil}
+                    options={{
+                        tabBarIcon: ({ color, size }) => (
+                            <MaterialCommunityIcons name="account-circle-outline" color={"white"} size={32} />
                         ),
                     }}
                 />
