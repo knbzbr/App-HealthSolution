@@ -10,7 +10,6 @@ const lista = [
                 nomeProfissional: "Dra.Sandra",
                 profissao: "Psicóloga"
             },
-            
         ],
     }
 ]
@@ -18,7 +17,7 @@ const lista = [
 export default function Agendamento() {
     return (
         <View style={styles.container}>
-            
+            <Text>OIIIIII</Text>
         </View>
     )
 }
