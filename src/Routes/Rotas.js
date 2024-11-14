@@ -8,6 +8,7 @@ import { AuthContext } from '../Context/AuthContext';
 import Home from '../Pages/Home';
 import Consultas from '../Pages/Consultas';
 import Agendamento from '../Pages/Agendamento';
+import Login from '../Pages/Login';
 
 
 
@@ -17,9 +18,9 @@ export default function Rotas() {
 
     const { logado } = useContext(AuthContext);
 
-    // if (!logado) {
-    //     return (<Login />)
-    // }
+    if (!logado) {
+        return (<Login />)
+    }
 
     return (
         <NavigationContainer>

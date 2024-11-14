@@ -2,9 +2,24 @@ import { StatusBar } from "expo-status-bar";
 import AuthProvider from "./src/Context/AuthContext";
 import Rotas from "./src/Routes/Rotas";
 import { Image, StyleSheet, View } from "react-native";
+import { useState } from "react";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Login from "./src/Pages/Login";
 
+const Tab = createBottomTabNavigator();
 
 export default function App() {
+
+  const [logado, setLogado] = useState(false);
+  const [cadastro, setCadastro] = useState(false);
+
+  if (!logado) {
+    return (<Login setLogado={setLogado} setCadastro={setCadastro}/>)
+  }
+  if (cadastro) {
+    return (<Cadastro setCadastro={setCadastro} setLogado={setLogado} />)
+  }
+
   return (
     <AuthProvider>
       <View style={css.header}>

@@ -9,20 +9,22 @@ function AuthProvider({ children }) {
     async function Login(email, senha) {
 
         if (email != "" && senha != "") {
-            await fetch('', {
+            await fetch('http://localhost:5251/api/Usuario/GetAllUsuario', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
                 },
                 body: JSON.stringify({
-                    username: email,
-                    password: senha
+                    usuarioEmail: email,
+                    usuarioSenha: senha
                 })
             })
-                .then(res => (res.ok == true) ? res.json() : false)
+                .then(res => res.json() )
                 .then(json => {
-                    setLogado((json.token) ? true : false);
-                    setError((json.token) ? false : true);
+                    if( json.usuarioId ) {
+                        setLogado(true);
+                    }
+                    
                 }
                 )
                 .catch(err => setError(true))
