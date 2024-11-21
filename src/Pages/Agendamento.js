@@ -36,24 +36,23 @@ const DATA = [
 
 
 
-const Item = ({ imagem, title, subtitulo, id }) => (
-    <TouchableOpacity style={styles.item} key={id}>
-        <Image source={imagem} resizeMode="cover" style={styles.image} />
-        <View style={styles.textbox}>
-            <Text style={styles.title}>{title}</Text>
-            <Text style={styles.subtitulo}>{subtitulo}</Text>
-        </View>
-    </TouchableOpacity>
-);
-
-
-const onPress = () => {
-    Alert.alert('Agendamento', 'Seu agendamento foi concluído com sucesso!');
-};
-
-
 export default function Agendamento() {
 
+    const Item = ({ imagem, title, subtitulo, id }) => (
+        <TouchableOpacity style={[styles.item, { backgroundColor: profissional == title ? "#0B8AA8" : "#8DCCDB" }]} key={id} onPress={() => setProfissional(title)}>
+            <Image source={imagem} resizeMode="cover" style={styles.image} />
+            <View style={styles.textbox}>
+                <Text style={styles.title}>{title}</Text>
+                <Text style={styles.subtitulo}>{subtitulo}</Text>
+            </View>
+        </TouchableOpacity>
+    );
+    
+    const onPress = () => {
+        Alert.alert('Agendamento', 'Seu agendamento foi concluído com sucesso!');
+    };
+
+    const [profissional, setProfissional] = useState();
     const [dia, setDia] = useState();
     const [hora, setHora] = useState();
 

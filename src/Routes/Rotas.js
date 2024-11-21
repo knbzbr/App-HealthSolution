@@ -18,9 +18,9 @@ export default function Rotas() {
 
     const { logado } = useContext(AuthContext);
 
-    if (!logado) {
-        return (<Login />)
-    }
+    //if (!logado) {
+      //  return (<Login />)
+    //}
 
     return (
         <NavigationContainer>
