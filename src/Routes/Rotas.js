@@ -8,6 +8,7 @@ import { AuthContext } from '../Context/AuthContext';
 import Home from '../Pages/Home';
 import Consultas from '../Pages/Consultas';
 import Agendamento from '../Pages/Agendamento';
+import Login from '../Pages/Login';
 import Cadastro from '../components/Cadastro';
 
 

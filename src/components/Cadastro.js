@@ -33,22 +33,22 @@ export default function Cadastro({ setLogado, setCadastro, setConcluido }) {
             return;
         }
 
-        if (cpf== "") {
+        if (cpf == "") {
             setErro("Campo obrigatório");
             return;
         }
 
-        if (endereco== "") {
+        if (endereco == "") {
             setErro("Campo obrigatório");
             return;
         }
 
-        if (telefone== "") {
+        if (telefone == "") {
             setErro("Campo obrigatório");
             return;
         }
 
-        if (email== "") {
+        if (email == "") {
             setErro("Campo obrigatório");
             return;
         }
@@ -83,117 +83,119 @@ export default function Cadastro({ setLogado, setCadastro, setConcluido }) {
     }
     return (
         <View style={css.view}>
-                <Image style={css.logo} source={require('../../assets/LogoHealthSolutions.png')} />
+            <Image style={css.logo} source={require('../../assets/LogoHealthSolutions.png')} />
+            <TouchableOpacity onPress={Voltar}>
                 <MaterialCommunityIcons name="chevron-left" size={30} />
-                <ScrollView>
-                    <TextInput
-                        style={css.inputs}
-                        placeholder="Nome Completo"
-                        placeholderTextColor="black"
-                        css={{
-                            placeholderStyle: {
-                                fontWeight: "bold",
-                            },
-                        }}
-                        onChangeText={(digitado) => setNome(digitado)}
-                        value={nome}
-                    />
-                    {erro && <Text style={css.erro}>{erro}</Text>}
-                    <TextInput style={css.inputs} placeholder="Data de Nascimento"
-                        placeholderTextColor="black"
-                        css={{
-                            placeholderStyle: {
-                                fontWeight: "bold",
-                            },
-                        }}
-                        onChangeText={(digitado) => setDatanascimento(digitado)}
-                        value={datanascimento}
-                    />
-                    {erro && <Text style={css.erro}>{erro}</Text>}
-                    <TextInput style={css.inputs} placeholder="Sexo"
-                        placeholderTextColor="black"
-                        css={{
-                            placeholderStyle: {
-                                fontWeight: "bold",
-                            },
-                        }}
-                        onChangeText={(digitado) => setSexo(digitado)}
-                        value={sexo}
-                    />
-                    {erro && <Text style={css.erro}>{erro}</Text>}
-                    <TextInput style={css.inputs} placeholder="CPF"
-                        placeholderTextColor="black"
-                        css={{
-                            placeholderStyle: {
-                                fontWeight: "bold",
-                            },
-                        }}
-                        onChangeText={(digitado) => setCpf(digitado)}
-                        value={cpf}
-                    />
-                    {erro && <Text style={css.erro}>{erro}</Text>}
-                    <TextInput style={css.inputs} placeholder="Endereço"
-                        placeholderTextColor="black"
-                        css={{
-                            placeholderStyle: {
-                                fontWeight: "bold",
-                            },
-                        }}
-                        onChangeText={(digitado) => setEndereco(digitado)}
-                        value={endereco}
-                    />
-                    {erro && <Text style={css.erro}>{erro}</Text>}
-                    <TextInput style={css.inputs} placeholder="Telefone"
-                        placeholderTextColor="black"
-                        css={{
-                            placeholderStyle: {
-                                fontWeight: "bold",
-                            },
-                        }}
-                        onChangeText={(digitado) => setTelefone(digitado)}
-                        value={telefone}
-                    />
-                    {erro && <Text style={css.erro}>{erro}</Text>}
-                    <TextInput style={css.inputs} placeholder="Email"
-                        placeholderTextColor="black"
-                        css={{
-                            placeholderStyle: {
-                                fontWeight: "bold",
-                            },
-                        }}
-                        onChangeText={(digitado) => setEmail(digitado)}
-                        value={email}
-                    />
-                    {erro && <Text style={css.erro}>{erro}</Text>}
-                    <TextInput style={css.inputs} placeholder="Senha" secureTextEntry={true}
-                        placeholderTextColor="black"
-                        css={{
-                            placeholderStyle: {
-                                fontWeight: "bold",
-                            },
-                        }}
-                        onChangeText={(digitado) => setSenha(digitado)}
-                        value={senha}
-                    />
-                    {erro && <Text style={css.erro}>{erro}</Text>}
-                    <TextInput style={css.inputs} placeholder="Confirmar Senha" secureTextEntry={true}
-                        placeholderTextColor="black"
-                        css={{
-                            placeholderStyle: {
-                                fontWeight: "bold",
-                            },
-                        }}
-                        onChangeText={(digitado) => setConfirmada(digitado)}
-                        value={confirmada}
-                    />
-                    {erro && <Text style={css.erro}>{erro}</Text>}
-                    <TouchableOpacity style={css.btn} onPress={Cadastrar}>
-                        <Text style={css.btnText}>Cadastrar</Text>
-                    </TouchableOpacity>
-                </ScrollView>
+            </TouchableOpacity>
+            <ScrollView>
+                <TextInput
+                    style={css.inputs}
+                    placeholder="Nome Completo"
+                    placeholderTextColor="black"
+                    css={{
+                        placeholderStyle: {
+                            fontWeight: "bold",
+                        },
+                    }}
+                    onChangeText={(digitado) => setNome(digitado)}
+                    value={nome}
+                />
+                {erro && <Text style={css.erro}>{erro}</Text>}
+                <TextInput style={css.inputs} placeholder="Data de Nascimento"
+                    placeholderTextColor="black"
+                    css={{
+                        placeholderStyle: {
+                            fontWeight: "bold",
+                        },
+                    }}
+                    onChangeText={(digitado) => setDatanascimento(digitado)}
+                    value={datanascimento}
+                />
+                {erro && <Text style={css.erro}>{erro}</Text>}
+                <TextInput style={css.inputs} placeholder="Sexo"
+                    placeholderTextColor="black"
+                    css={{
+                        placeholderStyle: {
+                            fontWeight: "bold",
+                        },
+                    }}
+                    onChangeText={(digitado) => setSexo(digitado)}
+                    value={sexo}
+                />
+                {erro && <Text style={css.erro}>{erro}</Text>}
+                <TextInput style={css.inputs} placeholder="CPF"
+                    placeholderTextColor="black"
+                    css={{
+                        placeholderStyle: {
+                            fontWeight: "bold",
+                        },
+                    }}
+                    onChangeText={(digitado) => setCpf(digitado)}
+                    value={cpf}
+                />
+                {erro && <Text style={css.erro}>{erro}</Text>}
+                <TextInput style={css.inputs} placeholder="Endereço"
+                    placeholderTextColor="black"
+                    css={{
+                        placeholderStyle: {
+                            fontWeight: "bold",
+                        },
+                    }}
+                    onChangeText={(digitado) => setEndereco(digitado)}
+                    value={endereco}
+                />
+                {erro && <Text style={css.erro}>{erro}</Text>}
+                <TextInput style={css.inputs} placeholder="Telefone"
+                    placeholderTextColor="black"
+                    css={{
+                        placeholderStyle: {
+                            fontWeight: "bold",
+                        },
+                    }}
+                    onChangeText={(digitado) => setTelefone(digitado)}
+                    value={telefone}
+                />
+                {erro && <Text style={css.erro}>{erro}</Text>}
+                <TextInput style={css.inputs} placeholder="Email"
+                    placeholderTextColor="black"
+                    css={{
+                        placeholderStyle: {
+                            fontWeight: "bold",
+                        },
+                    }}
+                    onChangeText={(digitado) => setEmail(digitado)}
+                    value={email}
+                />
+                {erro && <Text style={css.erro}>{erro}</Text>}
+                <TextInput style={css.inputs} placeholder="Senha" secureTextEntry={true}
+                    placeholderTextColor="black"
+                    css={{
+                        placeholderStyle: {
+                            fontWeight: "bold",
+                        },
+                    }}
+                    onChangeText={(digitado) => setSenha(digitado)}
+                    value={senha}
+                />
+                {erro && <Text style={css.erro}>{erro}</Text>}
+                <TextInput style={css.inputs} placeholder="Confirmar Senha" secureTextEntry={true}
+                    placeholderTextColor="black"
+                    css={{
+                        placeholderStyle: {
+                            fontWeight: "bold",
+                        },
+                    }}
+                    onChangeText={(digitado) => setConfirmada(digitado)}
+                    value={confirmada}
+                />
+                {erro && <Text style={css.erro}>{erro}</Text>}
+                <TouchableOpacity style={css.btn} onPress={Cadastrar}>
+                    <Text style={css.btnText}>Cadastrar</Text>
+                </TouchableOpacity>
+            </ScrollView>
         </View>
     )
-}2
+} 2
 
 const css = StyleSheet.create({
     view: {
@@ -227,7 +229,7 @@ const css = StyleSheet.create({
         resizeMode: "contain"
     },
     btn: {
-        
+
         width: "80%",
         height: 40,
         color: "white",
