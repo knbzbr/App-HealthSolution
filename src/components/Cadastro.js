@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from "react";
-import { Image, ImageBackground, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
 
 export default function Cadastro({ setLogado, setCadastro, setConcluido }) {
@@ -83,6 +84,7 @@ export default function Cadastro({ setLogado, setCadastro, setConcluido }) {
     return (
         <View style={css.view}>
                 <Image style={css.logo} source={require('../../assets/LogoHealthSolutions.png')} />
+                <MaterialCommunityIcons name="chevron-left" size={30} />
                 <ScrollView>
                     <TextInput
                         style={css.inputs}
@@ -188,32 +190,29 @@ export default function Cadastro({ setLogado, setCadastro, setConcluido }) {
                     <TouchableOpacity style={css.btn} onPress={Cadastrar}>
                         <Text style={css.btnText}>Cadastrar</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={css.btn} onPress={Voltar}>
-                        <Text style={css.btnText}>Voltar</Text>
-                    </TouchableOpacity>
                 </ScrollView>
         </View>
     )
-}
+}2
 
 const css = StyleSheet.create({
     view: {
+        backgroundColor: '#F4F4F4',
         width: "100%",
         height: "100%",
         flex: 1,
         justifyContent: "center",
-        alignItems: "center"
     },
     inputs: {
-        borderRadius: 5,
+        borderRadius: 3,
         backgroundColor: 'white',
-        width: '85%',
-        height: 50,
+        width: '80%',
+        height: 40,
         padding: 10,
         marginTop: 15,
         borderWidth: 0.3,
         marginBottom: 15,
-        fontSize: 16.5,
+        fontSize: 16,
         alignSelf: "center"
     },
     image: {
@@ -228,10 +227,11 @@ const css = StyleSheet.create({
         resizeMode: "contain"
     },
     btn: {
-        width: "85%",
-        height: 50,
+        
+        width: "80%",
+        height: 40,
         color: "white",
-        backgroundColor: "#E2DAB9",
+        backgroundColor: "#4796A8",
         borderRadius: 5,
         marginTop: 18,
         marginBottom: 12,
@@ -239,10 +239,10 @@ const css = StyleSheet.create({
     },
     btnText: {
         color: "black",
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: 'bold',
         textAlign: "center",
-        lineHeight: 50,
+        lineHeight: 40,
     },
     erro: {
         fontSize: 11,
@@ -250,6 +250,7 @@ const css = StyleSheet.create({
         alignSelf: "center",
         width: "85%",
         marginBottom: 10,
-        marginTop: -15
+        marginTop: -15,
+        marginLeft: 20
     },
 })
