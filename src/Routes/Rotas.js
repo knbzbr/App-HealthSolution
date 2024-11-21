@@ -29,7 +29,7 @@ export default function Rotas() {
                     headerShown: false,
                     tabBarShowLabel: false,
                     tabBarStyle: {
-                        backgroundColor: '#191919',
+                        backgroundColor: '#4796A8',
                     },
                     tabBarActiveTintColor: "white"
                 }}
@@ -39,7 +39,7 @@ export default function Rotas() {
                     component={Home}
                     options={{
                         tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="home-outline" color={"white"} size={32} />
+                            <MaterialCommunityIcons name="home-outline" color={"black"} size={35} />
                         ),
                     }}
                 />
@@ -57,7 +57,7 @@ export default function Rotas() {
                     component={Agendamento}
                     options={{
                         tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="calendar" color={"white"} size={32} />
+                            <MaterialCommunityIcons name="calendar" color={"black"} size={35} />
                         ),
                     }}
                 />
@@ -66,7 +66,7 @@ export default function Rotas() {
                     component={Perfil}
                     options={{
                         tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="account-circle-outline" color={"white"} size={32} />
+                            <MaterialCommunityIcons name="account-circle-outline" color={"black"} size={35} />
                         ),
                     }}
                 />
