@@ -8,6 +8,8 @@ import { AuthContext } from '../Context/AuthContext';
 import Home from '../Pages/Home';
 import Consultas from '../Pages/Consultas';
 import Agendamento from '../Pages/Agendamento';
+import Login from '../Pages/Login';
+import Perfil from '../Pages/Perfil';
 
 
 
@@ -17,9 +19,9 @@ export default function Rotas() {
 
     const { logado } = useContext(AuthContext);
 
-    // if (!logado) {
-    //     return (<Login />)
-    // }
+    //if (!logado) {
+      //  return (<Login />)
+    //}
 
     return (
         <NavigationContainer>
@@ -28,7 +30,7 @@ export default function Rotas() {
                     headerShown: false,
                     tabBarShowLabel: false,
                     tabBarStyle: {
-                        backgroundColor: '#191919',
+                        backgroundColor: '#4796A8',
                     },
                     tabBarActiveTintColor: "white"
                 }}
@@ -38,7 +40,7 @@ export default function Rotas() {
                     component={Home}
                     options={{
                         tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="home" color={color} size={size} />
+                            <MaterialCommunityIcons name="home-outline" color={"black"} size={35} />
                         ),
                     }}
                 />
@@ -56,7 +58,16 @@ export default function Rotas() {
                     component={Agendamento}
                     options={{
                         tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="map" color={color} size={size} />
+                            <MaterialCommunityIcons name="calendar" color={"black"} size={35} />
+                        ),
+                    }}
+                />
+                  <Tab.Screen
+                    name="Perfil"
+                    component={Perfil}
+                    options={{
+                        tabBarIcon: ({ color, size }) => (
+                            <MaterialCommunityIcons name="account-circle-outline" color={"black"} size={35} />
                         ),
                     }}
                 />
