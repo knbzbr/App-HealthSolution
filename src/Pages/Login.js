@@ -1,18 +1,18 @@
 import React, { useContext, useState } from 'react'
 import { Image, ImageBackground, Keyboard, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import Home from './Home';
+import Home from '../Pages/Home';
 import { AuthContext } from '../Context/AuthContext';
 
 
-export default function Login({ setCadastro }) {
+export default function Login({setCadastro}) {
 
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
 
-    const { Login } = useContext( AuthContext );
+    const { Login, error } = useContext( AuthContext );
 
-    function Cadastrar() {
-        setCadastro(true);
+    function RealizarLogin() {
+        Login(email, senha);
     }
 
 
@@ -41,12 +41,12 @@ export default function Login({ setCadastro }) {
                     style={css.inputs} onChangeText={(digitado) => setSenha(digitado)} value={senha} 
                 />
                 <Text style={css.senha}>Esqueci minha senha</Text>
-                <TouchableOpacity onPress={() => Login( email, senha ) }style={css.btn} >
+                <TouchableOpacity onPress={RealizarLogin} style={css.btn} >
                     <Text style={css.btnText}>Login</Text>
                 </TouchableOpacity>
 
                 <Text style={css.cadastrado}>Não é cadastrado?</Text>
-                <TouchableOpacity onPress={Cadastrar}>
+                <TouchableOpacity onPress={() => setCadastro( true )}>
                     <Text style={css.cadastrar} >Cadastrar</Text>
                 </TouchableOpacity>          
         </View>

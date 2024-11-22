@@ -2,7 +2,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../Context/AuthContext';
 
 import Home from '../Pages/Home';
@@ -10,18 +10,25 @@ import Consultas from '../Pages/Consultas';
 import Agendamento from '../Pages/Agendamento';
 import Login from '../Pages/Login';
 import Perfil from '../Pages/Perfil';
+import { Pressable } from 'react-native';
+import { Text } from 'react-native';
 
 
 
-const Tab = createBottomTabNavigator();
+    const Tab = createBottomTabNavigator();
 
 export default function Rotas() {
 
     const { logado } = useContext(AuthContext);
+    const [ cadastro, setCadastro ] = useState(false);
 
-    //if (!logado) {
-      //  return (<Login />)
-    //}
+    if (!logado && !cadastro ) {
+      return (<Login setCadastro={setCadastro}/>)
+    }
+
+    if( !logado && cadastro ) {
+        return ( <></> )
+    }
 
     return (
         <NavigationContainer>
@@ -41,6 +48,15 @@ export default function Rotas() {
                     options={{
                         tabBarIcon: ({ color, size }) => (
                             <MaterialCommunityIcons name="home-outline" color={"black"} size={35} />
+                        ),
+                    }}
+                />
+                <Tab.Screen
+                    name="Cadastro"
+                    component={Cadastro}
+                    options={{
+                        tabBarIcon: ({ color, size }) => (
+                            <MaterialCommunityIcons name="home" color={color} size={size} />
                         ),
                     }}
                 />
