@@ -15,7 +15,7 @@ import { Text } from 'react-native';
 
 
 
-const Tab = createBottomTabNavigator();
+    const Tab = createBottomTabNavigator();
 
 export default function Rotas() {
 
@@ -48,6 +48,15 @@ export default function Rotas() {
                     options={{
                         tabBarIcon: ({ color, size }) => (
                             <MaterialCommunityIcons name="home-outline" color={"black"} size={35} />
+                        ),
+                    }}
+                />
+                <Tab.Screen
+                    name="Cadastro"
+                    component={Cadastro}
+                    options={{
+                        tabBarIcon: ({ color, size }) => (
+                            <MaterialCommunityIcons name="home" color={color} size={size} />
                         ),
                     }}
                 />
