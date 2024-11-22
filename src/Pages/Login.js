@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Image, ImageBackground, Keyboard, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import Home from '../Pages/Home';
 import { AuthContext } from '../Context/AuthContext';
@@ -8,13 +8,20 @@ export default function Login({setCadastro}) {
 
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
     const { Login, error } = useContext( AuthContext );
 
-    function RealizarLogin() {
+    useEffect(() => {
+        if (error){
+            setErrorMessage("Email ou senha incorreto")
+        }
+    }, [error]);
+
+    const Handerlogin = () => {
+        setErrorMessage("");
         Login(email, senha);
     }
-
 
     return (
         <View style={css.view}>
@@ -41,12 +48,13 @@ export default function Login({setCadastro}) {
                     style={css.inputs} onChangeText={(digitado) => setSenha(digitado)} value={senha} 
                 />
                 <Text style={css.senha}>Esqueci minha senha</Text>
-                <TouchableOpacity onPress={RealizarLogin} style={css.btn} >
+                {errorMessage ? <Text style={css.text}> {errorMessage} </Text> : null}
+                <TouchableOpacity onPress={Handerlogin} style={css.btn} >
                     <Text style={css.btnText}>Login</Text>
                 </TouchableOpacity>
 
                 <Text style={css.cadastrado}>Não é cadastrado?</Text>
-                <TouchableOpacity onPress={() => setCadastro( true )}>
+                <TouchableOpacity onPress={() => NavigationPreloadManager.navigate("Cadastro")}>
                     <Text style={css.cadastrar} >Cadastrar</Text>
                 </TouchableOpacity>          
         </View>
@@ -58,6 +66,9 @@ const css = StyleSheet.create({
         width: "100%",
         height: "100%",
         flex: 1,
+    },
+    text:{
+        color: "black"
     },
     inputs: {
         borderRadius: 5,
