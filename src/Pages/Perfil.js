@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { ScrollView } from 'react-native';
+import { FlatList } from 'react-native';
 import { StyleSheet, View, Text, Image, Touchable, TouchableOpacity, TextInput } from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -10,82 +12,86 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 export default function Perfil() {
   return (
-    <View style={css.container}>
-      <View style={css.cxfotoperfil}>
-        <Image style={css.fotoperfil} source={require("../../assets/user.jpg")} />
-      </View>
-      <View style={css.caixaiconeum}>
-        <View style={css.msginicial}>
-          <Text>Olá,Kauan e Vitor!</Text>
+    <ScrollView>
+      <View style={css.container}>
+        <View style={css.cxfotoperfil}>
+          <Image style={css.fotoperfil} source={require("../../assets/user.jpg")} />
+        </View>
+        <View style={css.caixaiconeum}>
+          <View style={css.msginicial}>
+            <Text>Olá,Kauan e Vitor!</Text>
+          </View>
+          <View>
+            <MaterialCommunityIcons name="pencil" size={20} marginLeft={260} marginTop={-20} />
+          </View>
         </View>
         <View>
-          <MaterialCommunityIcons name="pencil" size={20} marginLeft={260} marginTop={-20} />
+          <TextInput
+            style={css.input}
+            placeholder="Cpf"
+          />
+          <View>
+            <MaterialCommunityIcons name="pencil" size={20} marginLeft={350} marginTop={-25} />
+          </View>
         </View>
-      </View>
-      <View>
-        <TextInput
-          style={css.input}
-          placeholder="Cpf"
-        />
         <View>
-          <MaterialCommunityIcons name="pencil" size={20} marginLeft={350} marginTop={-25} />
+          <TextInput
+            style={css.input}
+            placeholder="Endereço"
+          />
+          <View>
+            <MaterialCommunityIcons name="pencil" size={20} marginLeft={350} marginTop={-25} />
+          </View>
         </View>
-      </View>
-      <View>
-        <TextInput
-          style={css.input}
-          placeholder="Endereço"
-        />
         <View>
-          <MaterialCommunityIcons name="pencil" size={20} marginLeft={350} marginTop={-25} />
+          <TextInput
+            style={css.input}
+            placeholder="Telefone"
+          />
+          <View>
+            <MaterialCommunityIcons name="pencil" size={20} marginLeft={350} marginTop={-25} />
+          </View>
         </View>
-      </View>
-      <View>
-        <TextInput
-          style={css.input}
-          placeholder="Telefone"
-        />
         <View>
-          <MaterialCommunityIcons name="pencil" size={20} marginLeft={350} marginTop={-25} />
+          <TextInput
+            style={css.input}
+            placeholder="Email"
+          />
+          <View>
+            <MaterialCommunityIcons name="pencil" size={20} marginLeft={350} marginTop={-25} />
+          </View>
         </View>
-      </View>
-      <View>
-        <TextInput
-          style={css.input}
-          placeholder="Email"
-        />
+        <View style={css.caixadois}>
+          <Text>Minhas Consultas</Text>
+        </View>
         <View>
-          <MaterialCommunityIcons name="pencil" size={20} marginLeft={350} marginTop={-25} />
+          <MaterialCommunityIcons name="clipboard-check-multiple" size={25} marginTop={-25} marginLeft={25} />
         </View>
-      </View>
-      <View style={css.caixadois}>
-        <Text>Minhas Consultas e Exames</Text>
-      </View>
-      <View>
-        <MaterialCommunityIcons name="clipboard-check-multiple" size={25} marginTop={-25} marginLeft={25} />
-      </View>
-      <View style={css.caixatres}>
-        <Text>Configurações</Text>
-      </View>
-      <View>
-        <MaterialCommunityIcons name="cog-outline" size={25} marginTop={-23} marginLeft={25} color={"black"} />
-      </View>
-      <View style={css.caixaquatro}>
-        <Text style={css.caixacinco}>Ajuda</Text>
-      </View>
-      <View style={css.caixaseis}>
-        <Text>Perguntas frequentes</Text>
-      </View>
-      <View>
-        <MaterialCommunityIcons name="help-circle-outline" size={25} marginTop={-23} marginLeft={25} color={"black"} />
-      </View>
-      <View style={css.caixasete}>
-        <Text>Suporte técnico</Text>
-      </View>
-      <View>
-        <MaterialCommunityIcons name="headset" size={25} marginTop={-23} marginLeft={25} color={"black"} />
-      </View>
-    </View >
+        <View style={css.caixatres}>
+          <Text>Configurações</Text>
+        </View>
+        <View>
+          <MaterialCommunityIcons name="cog-outline" size={25} marginTop={-23} marginLeft={25} color={"black"} />
+        </View>
+        <View style={css.caixaquatro}>
+          <Text style={css.caixacinco}>Ajuda</Text>
+        </View>
+        <View style={css.caixaseis}>
+          <Text>Perguntas frequentes</Text>
+        </View>
+        <View>
+          <MaterialCommunityIcons name="help-circle-outline" size={25} marginTop={-23} marginLeft={25} color={"black"} />
+        </View>
+        <View style={css.caixasete}>
+          <Text>Suporte técnico</Text>
+        </View>
+        <View>
+          <MaterialCommunityIcons name="headset" size={25} marginTop={-23} marginLeft={25} color={"black"} />
+        </View>
+        <View style={css.vz}></View>
+      </View >
+    </ScrollView>
+
   )
 }
 
@@ -130,10 +136,14 @@ const css = StyleSheet.create({
   },
   caixaseis: {
     marginLeft: 55,
-    marginTop: 10
+    marginTop: 10,
   },
   caixasete: {
     marginLeft: 55,
-    marginTop: 10
+    marginTop: 10,
+  },
+  vz: {
+    width:"100%",
+    height:50
   }
 })
