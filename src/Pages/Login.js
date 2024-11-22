@@ -4,7 +4,7 @@ import Home from '../Pages/Home';
 import { AuthContext } from '../Context/AuthContext';
 
 
-export default function Login({setCadastro}) {
+export default function Login({setCadastro, navigation}) {
 
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
@@ -54,7 +54,7 @@ export default function Login({setCadastro}) {
                 </TouchableOpacity>
 
                 <Text style={css.cadastrado}>Não é cadastrado?</Text>
-                <TouchableOpacity onPress={() => NavigationPreloadManager.navigate("Cadastro")}>
+                <TouchableOpacity onPress={() => navigation.navigator("Cadastro")}>
                     <Text style={css.cadastrar} >Cadastrar</Text>
                 </TouchableOpacity>          
         </View>

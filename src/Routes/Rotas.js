@@ -12,6 +12,7 @@ import Login from '../Pages/Login';
 import Perfil from '../Pages/Perfil';
 import { Pressable } from 'react-native';
 import { Text } from 'react-native';
+import Cadastro from '../Pages/Cadastro';
 
 
 
@@ -23,11 +24,11 @@ export default function Rotas() {
     const [ cadastro, setCadastro ] = useState(false);
 
     if (!logado && !cadastro ) {
-      return (<Login setCadastro={setCadastro}/>)
+      return (<Login/>)
     }
 
     if( !logado && cadastro ) {
-        return ( <></> )
+        return ( <Cadastro/> )
     }
 
     return (
