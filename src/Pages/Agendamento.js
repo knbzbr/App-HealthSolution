@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { StyleSheet, Text, View, FlatList, Image, Button, Alert, TouchableOpacity, ScrollView } from "react-native";
+import { useEffect, useState } from "react";
+import { StyleSheet, Text, View, Image, Alert, TouchableOpacity, ScrollView } from "react-native";
 
 const DATA = [
     {
@@ -38,6 +38,43 @@ const DATA = [
 
 export default function Agendamento() {
 
+    const onPress = () => {
+        Alert.alert('Agendamento', 'Seu agendamento foi concluído com sucesso!');
+    };
+
+    const [profissional, setProfissional] = useState();
+    const [dia, setDia] = useState();
+    const [hora, setHora] = useState();
+
+
+    async function getProfissionais()
+    {
+        await fetch('http://localhost:5251/api/Usuario/LoginUsuario', {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                usuarioEmail: email,
+                usuarioSenha: senha
+            })
+        })
+            .then(res => res.json() )
+            .then(json => {
+                if( json.usuarioId ) {
+                    setLogado(true);
+                }
+            }
+            )
+            .catch(err => setError(true))
+    }
+
+
+
+    useEffect( () => {
+
+    }, [] );
+
     const Item = ({ imagem, title, subtitulo, id }) => (
         <TouchableOpacity style={[styles.item, { backgroundColor: profissional == title ? "#0B8AA8" : "#8DCCDB" }]} key={id} onPress={() => setProfissional(title)}>
             <Image source={imagem} resizeMode="cover" style={styles.image} />
@@ -48,13 +85,7 @@ export default function Agendamento() {
         </TouchableOpacity>
     );
     
-    const onPress = () => {
-        Alert.alert('Agendamento', 'Seu agendamento foi concluído com sucesso!');
-    };
-
-    const [profissional, setProfissional] = useState();
-    const [dia, setDia] = useState();
-    const [hora, setHora] = useState();
+    
 
     return (
         <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>

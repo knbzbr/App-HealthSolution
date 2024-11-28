@@ -9,7 +9,7 @@ function AuthProvider({ children }) {
     async function Login(email, senha) {
 
         if (email != "" && senha != "") {
-            await fetch('http://10.133.22.11:5251/api/Usuario/LoginUsuario', {
+            await fetch('http://http://10.133.22.29/:5251/api/Usuario/LoginUsuario', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'

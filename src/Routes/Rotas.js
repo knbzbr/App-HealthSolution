@@ -15,19 +15,19 @@ import { Text } from 'react-native';
 
 
 
-    const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 
 export default function Rotas() {
 
     const { logado } = useContext(AuthContext);
-    const [ cadastro, setCadastro ] = useState(false);
+    const [cadastro, setCadastro] = useState(false);
 
-    if (!logado && !cadastro ) {
-      return (<Login setCadastro={setCadastro}/>)
+    if (!logado && !cadastro) {
+        return (<Login setCadastro={setCadastro} />)
     }
 
-    if( !logado && cadastro ) {
-        return ( <></> )
+    if (!logado && cadastro) {
+        return (<></>)
     }
 
     return (
@@ -78,7 +78,7 @@ export default function Rotas() {
                         ),
                     }}
                 />
-                  <Tab.Screen
+                <Tab.Screen
                     name="Perfil"
                     component={Perfil}
                     options={{
