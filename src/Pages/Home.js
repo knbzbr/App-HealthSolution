@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, View, Text, Image, Touchable, TouchableOpacity } from 'react-native'
 
 
-export default function Home() {
+export default function Home({navigation}) {
   return (
     <View style={css.container}>
       <View style={css.body}>
@@ -32,7 +32,7 @@ export default function Home() {
             <Text style={css.txt}>Pilates</Text>
           </View>
         </View>
-        <TouchableOpacity style={css.Agnd}>
+        <TouchableOpacity style={css.Agnd} onPress={() => navigation.navigate( "Consultas" )}>
           <Text style={css.btnTxt}>Agende já sua consulta</Text>
         </TouchableOpacity>
       </View>

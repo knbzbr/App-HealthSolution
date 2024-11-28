@@ -10,21 +10,8 @@ const Tab = createBottomTabNavigator();
 
 export default function App() {
 
-  const [logado, setLogado] = useState(false);
-  const [cadastro, setCadastro] = useState(false);
-
-  if (!logado) {
-    return (<Login setLogado={setLogado} setCadastro={setCadastro}/>)
-  }
-  if (cadastro) {
-    return (<Cadastro setCadastro={setCadastro} setLogado={setLogado} />)
-   }
-
   return (
     <AuthProvider>
-      <View style={css.header}>
-        <Image style={css.logo} source={require("./assets/LogoHealthSolutions.png")} />
-      </View>
       <StatusBar style="light" />
       <Rotas />
     </AuthProvider>

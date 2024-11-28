@@ -1,20 +1,20 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Image, ImageBackground, Keyboard, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import Home from './Home';
+import Home from '../Pages/Home';
 import { AuthContext } from '../Context/AuthContext';
 
 
-export default function Login({ setCadastro }) {
+export default function Login({setCadastro, navigation}) {
 
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
 
-    const { Login } = useContext( AuthContext );
+    const { Login, error } = useContext( AuthContext );
 
-    function Cadastrar() {
-        setCadastro(true);
+
+    function handleLogin() {
+        Login(email, senha);
     }
-
 
     return (
         <View style={css.view}>
@@ -41,12 +41,13 @@ export default function Login({ setCadastro }) {
                     style={css.inputs} onChangeText={(digitado) => setSenha(digitado)} value={senha} 
                 />
                 <Text style={css.senha}>Esqueci minha senha</Text>
-                <TouchableOpacity onPress={() => Login( email, senha ) }style={css.btn} >
+                {error && <Text style={css.text}>Dados incorretos</Text>}
+                <TouchableOpacity onPress={handleLogin} style={css.btn} >
                     <Text style={css.btnText}>Login</Text>
                 </TouchableOpacity>
 
                 <Text style={css.cadastrado}>Não é cadastrado?</Text>
-                <TouchableOpacity onPress={Cadastrar}>
+                <TouchableOpacity onPress={() => navigation.navigator("Cadastro")}>
                     <Text style={css.cadastrar} >Cadastrar</Text>
                 </TouchableOpacity>          
         </View>
@@ -58,6 +59,9 @@ const css = StyleSheet.create({
         width: "100%",
         height: "100%",
         flex: 1,
+    },
+    text:{
+        color: "black"
     },
     inputs: {
         borderRadius: 5,
