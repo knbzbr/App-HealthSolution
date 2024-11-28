@@ -41,15 +41,16 @@ export default function Login({setCadastro, navigation}) {
                     style={css.inputs} onChangeText={(digitado) => setSenha(digitado)} value={senha} 
                 />
                 <Text style={css.senha}>Esqueci minha senha</Text>
-                {error && <Text style={css.text}>Dados incorretos</Text>}
                 <TouchableOpacity onPress={handleLogin} style={css.btn} >
                     <Text style={css.btnText}>Login</Text>
+                    {error && <Text style={css.text}>Email ou senha incorreto</Text>}
                 </TouchableOpacity>
 
                 <Text style={css.cadastrado}>Não é cadastrado?</Text>
                 <TouchableOpacity onPress={() => navigation.navigator("Cadastro")}>
                     <Text style={css.cadastrar} >Cadastrar</Text>
-                </TouchableOpacity>          
+                </TouchableOpacity>      
+                    
         </View>
     )
 }
@@ -59,9 +60,6 @@ const css = StyleSheet.create({
         width: "100%",
         height: "100%",
         flex: 1,
-    },
-    text:{
-        color: "black"
     },
     inputs: {
         borderRadius: 5,
@@ -98,6 +96,11 @@ const css = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: "center",
         lineHeight: 50,
+    },
+    text:{
+        color: "black",
+        textAlign:"center",
+       marginTop:"7%"
     },
     cadastrar: {
         fontWeight: 'bold',
