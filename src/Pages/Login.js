@@ -8,18 +8,11 @@ export default function Login({setCadastro, navigation}) {
 
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
-    const [errorMessage, setErrorMessage] = useState("");
 
     const { Login, error } = useContext( AuthContext );
 
-    useEffect(() => {
-        if (error){
-            setErrorMessage("Email ou senha incorreto")
-        }
-    }, [error]);
 
-    const Handerlogin = () => {
-        setErrorMessage("");
+    function handleLogin() {
         Login(email, senha);
     }
 
@@ -48,8 +41,8 @@ export default function Login({setCadastro, navigation}) {
                     style={css.inputs} onChangeText={(digitado) => setSenha(digitado)} value={senha} 
                 />
                 <Text style={css.senha}>Esqueci minha senha</Text>
-                {errorMessage ? <Text style={css.text}> {errorMessage} </Text> : null}
-                <TouchableOpacity onPress={Handerlogin} style={css.btn} >
+                {error && <Text style={css.text}>Dados incorretos</Text>}
+                <TouchableOpacity onPress={handleLogin} style={css.btn} >
                     <Text style={css.btnText}>Login</Text>
                 </TouchableOpacity>
 
