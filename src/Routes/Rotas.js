@@ -12,6 +12,7 @@ import Login from '../Pages/Login';
 import Perfil from '../Pages/Perfil';
 import { Pressable } from 'react-native';
 import { Text } from 'react-native';
+import Cadastro from '../Pages/Cadastro';
 
 
 
@@ -23,11 +24,11 @@ export default function Rotas() {
     const [ cadastro, setCadastro ] = useState(false);
 
     if (!logado && !cadastro ) {
-      return (<Login setCadastro={setCadastro}/>)
+      return (<Login/>)
     }
 
     if( !logado && cadastro ) {
-        return ( <></> )
+        return ( <Cadastro/> )
     }
 
     return (
@@ -65,7 +66,7 @@ export default function Rotas() {
                     component={Consultas}
                     options={{
                         tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="map" color={color} size={size} />
+                            <MaterialCommunityIcons name="map" color={color} size={25} />
                         ),
                     }}
                 />
@@ -74,7 +75,7 @@ export default function Rotas() {
                     component={Agendamento}
                     options={{
                         tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="calendar" color={"black"} size={35} />
+                            <MaterialCommunityIcons name="calendar" color={"black"} size={25} />
                         ),
                     }}
                 />
@@ -83,7 +84,7 @@ export default function Rotas() {
                     component={Perfil}
                     options={{
                         tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="account-circle-outline" color={"black"} size={35} />
+                            <MaterialCommunityIcons name="account-circle-outline" color={"black"} size={25} />
                         ),
                     }}
                 />
