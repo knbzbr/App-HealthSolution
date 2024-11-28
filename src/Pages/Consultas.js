@@ -6,7 +6,7 @@ import Animated, { BounceIn, BounceInUp, BounceOutUp, FadeIn, FadeInUp, FadeOut,
 
 const Item = ({ item }) => (
     <View style={styles.item} key={item.consultaId}>
-        <Text style={styles.title}>{item.consultaId} - {item.dataConsulta} </Text>
+        <Text style={styles.title}>{item.TipoConsulta} - {item.dataConsulta} </Text>
     </View>
 );
 

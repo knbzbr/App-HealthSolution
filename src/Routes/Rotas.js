@@ -27,7 +27,7 @@ export default function Rotas() {
     }
 
     if( !logado && cadastro ) {
-        return ( <></> )
+        return ( <Cadastro/> )
     }
 
     return (
