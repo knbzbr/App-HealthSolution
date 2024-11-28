@@ -24,10 +24,7 @@ function AuthProvider({ children }) {
                     if( json.usuarioId ) {
                         setLogado(true);
                         setError(false);
-                    } else {
-                        setError( true );
                     }
-
                 }
                 )
                 .catch(err => setError(true))
