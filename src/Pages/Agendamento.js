@@ -1,38 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { StyleSheet, Text, View, Image, Alert, TouchableOpacity, ScrollView } from "react-native";
+import { AuthContext } from "../Context/AuthContext";
 
-const DATA = [
-    {
-        id: 1,
-        imagem: require("../../assets/psico.jpg"),
-        title: 'Dra.Sandra',
-        subtitulo: 'Psicóloga'
-    },
-    {
-        id: 2,
-        imagem: require("../../assets/teo.jpg"),
-        title: 'Dra.Mayara',
-        subtitulo: 'Terapeuta Ocupacional'
-    },
-    {
-        id: 3,
-        imagem: require("../../assets/fono.jpg"),
-        title: 'Dra.Amanda',
-        subtitulo: 'Fonoaudióloga'
-    },
-    {
-        id: 4,
-        imagem: require("../../assets/fisio.jpg"),
-        title: 'Dr.Guilherme',
-        subtitulo: 'Fisioterapeuta'
-    },
-    {
-        id: 5,
-        imagem: require("../../assets/pilates.jpg"),
-        title: 'Dr.João Felipe',
-        subtitulo: 'Instrutor de Pilates'
-    },
-];
+
 
 
 
@@ -41,29 +11,62 @@ export default function Agendamento() {
     const onPress = () => {
         Alert.alert('Agendamento', 'Seu agendamento foi concluído com sucesso!');
     };
-
     const [profissional, setProfissional] = useState();
+    const [profissionais, setProfissionais] = useState();
+    const [tipoProfissionais, setTipoProfissionais] = useState();
     const [dia, setDia] = useState();
     const [hora, setHora] = useState();
 
+    const {usuario} = useContext(AuthContext);
 
-    async function getProfissionais()
-    {
-        await fetch('http://localhost:5251/api/Usuario/LoginUsuario', {
+
+    async function getProfissionais() {
+        await fetch('http://10.133.22.29:5251/api/Profissional/GetAllProfissional', {
             method: 'GET',
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+            .then(res => res.json())
+            .then(json => {
+                setProfissionais(json);
+            }
+            )
+            .catch(err => setError(true))
+    }
+
+    async function getTipoProfissionais() {
+        await fetch('http://10.133.22.29:5251/api/TipoProfissional/GetAllTipoProfissional', {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+            .then(res => res.json())
+            .then(json => {
+                setTipoProfissionais(json);
+            }
+            )
+            .catch(err => setError(true))
+    }
+
+    async function Agendamento() {
+        await fetch('http://10.133.22.29:5251/api/TipoProfissional/GetAllTipoProfissional', {
+            method: 'POST',
             headers: {
                 'content-type': 'application/json'
             },
             body: JSON.stringify({
-                usuarioEmail: email,
-                usuarioSenha: senha
+                pacienteId: usuario.usuarioId,
+                obsConsulta: "string",
+                profissionalId: 0,
+                dataConsulta: "2024-11-28T13:00:33.264Z"
+
             })
         })
-            .then(res => res.json() )
+            .then(res => res.json())
             .then(json => {
-                if( json.usuarioId ) {
-                    setLogado(true);
-                }
+                setTipoProfissionais(json);
             }
             )
             .catch(err => setError(true))
@@ -71,12 +74,13 @@ export default function Agendamento() {
 
 
 
-    useEffect( () => {
-
-    }, [] );
+    useEffect(() => {
+        getProfissionais();
+        getTipoProfissionais();
+    }, []);
 
     const Item = ({ imagem, title, subtitulo, id }) => (
-        <TouchableOpacity style={[styles.item, { backgroundColor: profissional == title ? "#0B8AA8" : "#8DCCDB" }]} key={id} onPress={() => setProfissional(title)}>
+        <TouchableOpacity style={[styles.item, { backgroundColor: profissional == title ? "#0B8AA8" : "#8DCCDB" }]} key={id} onPress={() => setProfissional(id)}>
             <Image source={imagem} resizeMode="cover" style={styles.image} />
             <View style={styles.textbox}>
                 <Text style={styles.title}>{title}</Text>
@@ -84,8 +88,8 @@ export default function Agendamento() {
             </View>
         </TouchableOpacity>
     );
-    
-    
+
+
 
     return (
         <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
@@ -93,8 +97,8 @@ export default function Agendamento() {
             <View>
                 <Text style={styles.text2}>Selecione o profissional:</Text>
             </View>
-            {DATA.map((item) =>
-                <Item imagem={item.imagem} title={item.title} subtitulo={item.subtitulo} id={item.id} key={item.id} />
+            {profissionais && tipoProfissionais && profissionais.map((item) =>
+                <Item imagem={item.imagem} title={item.nomeProfissional} subtitulo={tipoProfissionais.find(value => value.tipoProfissionalId == item.tipoProfissionalId)?.nomeTipoProfissional} id={item.profissionalId} key={item.profissionalId} />
             )}
             <View style={styles.box}>
                 <Text style={styles.text}>Selecione o dia de sua preferência:</Text>
