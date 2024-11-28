@@ -13,12 +13,12 @@ export default function App() {
   const [logado, setLogado] = useState(false);
   const [cadastro, setCadastro] = useState(false);
 
- // if (!logado) {
-    //return (<Login setLogado={setLogado} setCadastro={setCadastro}/>)//
- // }
-  //if (cadastro) {
-  //  return (<Cadastro setCadastro={setCadastro} setLogado={setLogado} />)//
- // }//
+  if (!logado) {
+    return (<Login setLogado={setLogado} setCadastro={setCadastro}/>)
+  }
+  if (cadastro) {
+    return (<Cadastro setCadastro={setCadastro} setLogado={setLogado} />)
+   }
 
   return (
     <AuthProvider>

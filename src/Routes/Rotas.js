@@ -10,6 +10,7 @@ import Consultas from '../Pages/Consultas';
 import Agendamento from '../Pages/Agendamento';
 import Login from '../Pages/Login';
 import Perfil from '../Pages/Perfil';
+import { Text } from 'react-native';
 
 
 
@@ -19,9 +20,12 @@ export default function Rotas() {
 
     const { logado } = useContext(AuthContext);
 
-    //if (!logado) {
-      //  return (<Login />)
-    //}
+    if (!logado) {
+        return (<Login />)
+    }
+    else {
+        <Text>Tente novamente</Text>
+    }
 
     return (
         <NavigationContainer>
@@ -40,7 +44,7 @@ export default function Rotas() {
                     component={Home}
                     options={{
                         tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="home-outline" color={"black"} size={35} />
+                            <MaterialCommunityIcons name="home-outline" color={"black"} size={25} />
                         ),
                     }}
                 />
@@ -49,7 +53,7 @@ export default function Rotas() {
                     component={Consultas}
                     options={{
                         tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="map" color={color} size={size} />
+                            <MaterialCommunityIcons name="map" color={color} size={25} />
                         ),
                     }}
                 />
@@ -58,7 +62,7 @@ export default function Rotas() {
                     component={Agendamento}
                     options={{
                         tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="calendar" color={"black"} size={35} />
+                            <MaterialCommunityIcons name="calendar" color={"black"} size={25} />
                         ),
                     }}
                 />
@@ -67,7 +71,7 @@ export default function Rotas() {
                     component={Perfil}
                     options={{
                         tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="account-circle-outline" color={"black"} size={35} />
+                            <MaterialCommunityIcons name="account-circle-outline" color={"black"} size={25} />
                         ),
                     }}
                 />

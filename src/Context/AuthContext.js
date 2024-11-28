@@ -8,7 +8,7 @@ function AuthProvider({ children }) {
 
     async function Login(email, senha) {
 
-        if (email != "" && senha != "") {
+        if (email != "b@b.com" && senha != "123") {
             await fetch('http://localhost:5251/api/Usuario/LoginUsuario', {
                 method: 'POST',
                 headers: {
