@@ -32,7 +32,7 @@ export default function Home({navigation}) {
             <Text style={css.txt}>Pilates</Text>
           </View>
         </View>
-        <TouchableOpacity style={css.Agnd} onPress={() => navigation.navigate( "Consultas" )}>
+        <TouchableOpacity style={css.Agnd} onPress={() => navigation.navigate( "Agendamento" )}>
           <Text style={css.btnTxt}>Agende já sua consulta</Text>
         </TouchableOpacity>
       </View>

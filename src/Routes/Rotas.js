@@ -16,19 +16,19 @@ import Cadastro from '../Pages/Cadastro';
 
 
 
-    const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 
 export default function Rotas() {
 
     const { logado } = useContext(AuthContext);
-    const [ cadastro, setCadastro ] = useState(false);
+    const [cadastro, setCadastro] = useState(false);
 
-    if (!logado && !cadastro ) {
-      return (<Login/>)
+    if (!logado && !cadastro) {
+        return (<Login setCadastro={setCadastro} />)
     }
 
-    if( !logado && cadastro ) {
-        return ( <Cadastro/> )
+    if (!logado && cadastro) {
+        return (<Cadastro setCadastro={setCadastro} />)
     }
 
     return (
@@ -53,15 +53,6 @@ export default function Rotas() {
                     }}
                 />
                 <Tab.Screen
-                    name="Cadastro"
-                    component={Cadastro}
-                    options={{
-                        tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="home" color={color} size={size} />
-                        ),
-                    }}
-                />
-                <Tab.Screen
                     name="Consultas"
                     component={Consultas}
                     options={{
@@ -79,7 +70,7 @@ export default function Rotas() {
                         ),
                     }}
                 />
-                  <Tab.Screen
+                <Tab.Screen
                     name="Perfil"
                     component={Perfil}
                     options={{

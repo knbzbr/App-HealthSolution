@@ -22,7 +22,8 @@ function AuthProvider({ children }) {
             })
                 .then(res => res.json() )
                 .then(json => {
-                    if( json.usuarioId ) {
+                    if( json.usuarioId > 0 ) {
+                        setUsuario( json );
                         setLogado(true);
                         setError(false);
                         setUsuario( json );
