@@ -62,6 +62,15 @@ export default function Rotas() {
                     }}
                 />
                 <Tab.Screen
+                    name="Consultas"
+                    component={Consultas}
+                    options={{
+                        tabBarIcon: ({ color, size }) => (
+                            <MaterialCommunityIcons name="comment-check" color={"black"} size={25} />
+                        ),
+                    }}
+                />
+                <Tab.Screen
                     name="Perfil"
                     component={Perfil}
                     options={{

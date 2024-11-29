@@ -72,8 +72,7 @@ export default function Cadastro({ setCadastro }) {
             && email != ""
             && senha != ""
             && confirmada != "") {
-            setLogado(true);
-            setConcluido(true);
+
         }
     }
     return (
