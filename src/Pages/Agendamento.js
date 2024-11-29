@@ -1,45 +1,83 @@
-import { useState } from "react";
-import { StyleSheet, Text, View, FlatList, Image, Button, Alert, TouchableOpacity, ScrollView } from "react-native";
-
-const DATA = [
-    {
-        id: 1,
-        imagem: require("../../assets/psico.jpg"),
-        title: 'Dra.Sandra',
-        subtitulo: 'Psicóloga'
-    },
-    {
-        id: 2,
-        imagem: require("../../assets/teo.jpg"),
-        title: 'Dra.Mayara',
-        subtitulo: 'Terapeuta Ocupacional'
-    },
-    {
-        id: 3,
-        imagem: require("../../assets/fono.jpg"),
-        title: 'Dra.Amanda',
-        subtitulo: 'Fonoaudióloga'
-    },
-    {
-        id: 4,
-        imagem: require("../../assets/fisio.jpg"),
-        title: 'Dr.Guilherme',
-        subtitulo: 'Fisioterapeuta'
-    },
-    {
-        id: 5,
-        imagem: require("../../assets/pilates.jpg"),
-        title: 'Dr.João Felipe',
-        subtitulo: 'Instrutor de Pilates'
-    },
-];
-
+import { useContext, useEffect, useState } from "react";
+import { StyleSheet, Text, View, Image, Alert, TouchableOpacity, ScrollView } from "react-native";
+import { AuthContext } from "../Context/AuthContext";
+import CalendarPicker from "react-native-calendar-picker";
 
 
 export default function Agendamento() {
+    const [profissional, setProfissional] = useState(null);
+    const [profissionais, setProfissionais] = useState([]);
+    const [tipoProfissionais, setTipoProfissionais] = useState([]);
+    const [hora, setHora] = useState(null);
+    const [selectedStartDate, setSelectedStartDate] = useState(null);
+    const [obsConsulta, setObsConsulta ] = useState();
+
+    const horarios1 = ["08:00", "09:00", "10:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"];
+
+    const { usuario } = useContext(AuthContext);
+
+    const onPress = () => {
+        Alert.alert('Agendamento', 'Seu agendamento foi concluído com sucesso!');
+    };
+
+    async function getProfissionais() {
+        try {
+            const response = await fetch('http://10.133.22.29:5251/api/Profissional/GetAllProfissional', {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' }
+            });
+            const json = await response.json();
+            setProfissionais(json);
+        } catch (err) {
+            console.error('Erro ao obter profissionais:', err);
+        }
+    }
+
+    async function getTipoProfissionais() {
+        try {
+            const response = await fetch('http://10.133.22.29:5251/api/TipoProfissional/GetAllTipoProfissional', {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' }
+            });
+            const json = await response.json();
+            setTipoProfissionais(json);
+        } catch (err) {
+            console.error('Erro ao obter tipos de profissionais:', err);
+        }
+    }
+
+    async function agendarConsulta() {
+        console.log(selectedStartDate + "T" + hora + ":00Z");
+        await fetch('http://10.133.22.29:5251/api/Consulta/CreateConsulta', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                pacienteId: usuario.usuarioId,
+                obsConsulta: obsConsulta,
+                profissionalId: profissional,
+                dataConsulta: selectedStartDate + "T" + hora + ":00Z"
+            })
+        })
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.log(err))
+
+    }
+
+    useEffect(() => {
+        getProfissionais();
+        getTipoProfissionais();
+    }, []);
+
+    const onDateChange = (date) => {
+        setSelectedStartDate(date.toISOString().split('T')[0]);
+    };
 
     const Item = ({ imagem, title, subtitulo, id }) => (
-        <TouchableOpacity style={[styles.item, { backgroundColor: profissional == title ? "#0B8AA8" : "#8DCCDB" }]} key={id} onPress={() => setProfissional(title)}>
+        <TouchableOpacity
+            style={[styles.item, { backgroundColor: profissional === id ? "#0B8AA8" : "#8DCCDB" }]}
+            onPress={() => { setProfissional(id); setObsConsulta( title + " - " + subtitulo )}}
+        >
             <Image source={imagem} resizeMode="cover" style={styles.image} />
             <View style={styles.textbox}>
                 <Text style={styles.title}>{title}</Text>
@@ -47,144 +85,56 @@ export default function Agendamento() {
             </View>
         </TouchableOpacity>
     );
-    
-    const onPress = () => {
-        Alert.alert('Agendamento', 'Seu agendamento foi concluído com sucesso!');
-    };
-
-    const [profissional, setProfissional] = useState();
-    const [dia, setDia] = useState();
-    const [hora, setHora] = useState();
 
     return (
         <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
             <Text style={styles.titulo}>Agendamento</Text>
+
             <View>
                 <Text style={styles.text2}>Selecione o profissional:</Text>
             </View>
-            {DATA.map((item) =>
-                <Item imagem={item.imagem} title={item.title} subtitulo={item.subtitulo} id={item.id} key={item.id} />
-            )}
+
+            {profissionais && tipoProfissionais && profissionais.map((item) => (
+                <Item
+                    imagem={item.imagem}
+                    title={item.nomeProfissional}
+                    subtitulo={tipoProfissionais.find(value => value.tipoProfissionalId === item.tipoProfissionalId)?.nomeTipoProfissional}
+                    id={item.profissionalId}
+                    key={item.profissionalId}
+                />
+            ))}
+
             <View style={styles.box}>
                 <Text style={styles.text}>Selecione o dia de sua preferência:</Text>
-                <View style={styles.boxdia}>
-
-                    <TouchableOpacity onPress={() => setDia("Seg")}>
-                        <View style={[styles.image2, { backgroundColor: dia == "Seg" ? "#0B8AA8" : "#8DCCDB" }]}
-                            onPress={() => setSelected(!selected)}
-                        >
-                            <Text style={styles.dia}>Seg</Text>
-                        </View>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity onPress={() => setDia("Ter")}>
-                        <View style={[styles.image2, { backgroundColor: dia == "Ter" ? "#0B8AA8" : "#8DCCDB" }]}>
-                            <Text style={styles.dia}>Ter</Text>
-                        </View>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity onPress={() => setDia("Qua")}>
-                        <View style={[styles.image2, { backgroundColor: dia == "Qua" ? "#0B8AA8" : "#8DCCDB" }]}>
-                            <Text style={styles.dia}>Qua</Text>
-                        </View>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity onPress={() => setDia("Qui")}>
-                        <View style={[styles.image2, { backgroundColor: dia == "Qui" ? "#0B8AA8" : "#8DCCDB" }]}>
-                            <Text style={styles.dia}>Qui</Text>
-                        </View>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity onPress={() => setDia("Sex")}>
-                        <View style={[styles.image2, { backgroundColor: dia == "Sex" ? "#0B8AA8" : "#8DCCDB" }]}>
-                            <Text style={styles.dia}>Sex</Text>
-                        </View>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity onPress={() => setDia("Sab")}>
-                        <View style={[styles.image2, { backgroundColor: dia == "Sab" ? "#0B8AA8" : "#8DCCDB" }]}>
-                            <Text style={styles.dia}>Sab</Text>
-                        </View>
-                    </TouchableOpacity>
-
-                </View>
+                <CalendarPicker
+                    onDateChange={onDateChange}
+                    months={["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]}
+                    weekdays={["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"]}
+                    nextTitle="Próximo"
+                    previousTitle="Anterior"
+                />
             </View>
+
             <View style={styles.box2}>
                 <Text style={styles.text3}>Confira os horários disponíveis:</Text>
                 <View style={styles.boxdia2}>
-
-                    <TouchableOpacity onPress={() => setHora("08:00")}>
-                        <View style={[styles.image3, { backgroundColor: hora == "08:00" ? "#0B8AA8" : "#8DCCDB" }]}>
-                            <Text style={styles.dia2}>08:00</Text>
-                        </View>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity onPress={() => setHora("09:00")}>
-                        <View style={[styles.image3, { backgroundColor: hora == "09:00" ? "#0B8AA8" : "#8DCCDB" }]}>
-                            <Text style={styles.dia2}>09:00</Text>
-                        </View>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity onPress={() => setHora("10:00")}>
-                        <View style={[styles.image3, { backgroundColor: hora == "10:00" ? "#0B8AA8" : "#8DCCDB" }]}>
-                            <Text style={styles.dia2}>10:00</Text>
-                        </View>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity onPress={() => setHora("13:00")}>
-                        <View style={[styles.image3, { backgroundColor: hora == "13:00" ? "#0B8AA8" : "#8DCCDB" }]}>
-                            <Text style={styles.dia2}>13:00</Text>
-                        </View>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity onPress={() => setHora("14:00")}>
-                        <View style={[styles.image3, { backgroundColor: hora == "14:00" ? "#0B8AA8" : "#8DCCDB" }]}>
-                            <Text style={styles.dia2}>14:00</Text>
-                        </View>
-                    </TouchableOpacity>
-
-                </View>
-                <View style={styles.boxdia2}>
-
-                    <TouchableOpacity onPress={() => setHora("15:00")}>
-                        <View style={[styles.image3, { backgroundColor: hora == "15:00" ? "#0B8AA8" : "#8DCCDB" }]}>
-                            <Text style={styles.dia2}>15:00</Text>
-                        </View>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity onPress={() => setHora("16:00")}>
-                        <View style={[styles.image3, { backgroundColor: hora == "16:00" ? "#0B8AA8" : "#8DCCDB" }]}>
-                            <Text style={styles.dia2}>16:00</Text>
-                        </View>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity onPress={() => setHora("17:00")}>
-                        <View style={[styles.image3, { backgroundColor: hora == "17:00" ? "#0B8AA8" : "#8DCCDB" }]}>
-                            <Text style={styles.dia2}>17:00</Text>
-                        </View>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity onPress={() => setHora("18:00")}>
-                        <View style={[styles.image3, { backgroundColor: hora == "18:00" ? "#0B8AA8" : "#8DCCDB" }]}>
-                            <Text style={styles.dia2}>18:00</Text>
-                        </View>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity onPress={() => setHora("19:00")}>
-                        <View style={[styles.image3, { backgroundColor: hora == "19:00" ? "#0B8AA8" : "#8DCCDB" }]}>
-                            <Text style={styles.dia2}>19:00</Text>
-                        </View>
-                    </TouchableOpacity>
-
+                    {horarios1.map((horaItem) => (
+                        <TouchableOpacity key={horaItem} onPress={() => setHora(horaItem)}>
+                            <View style={[styles.image3, { backgroundColor: hora === horaItem ? "#0B8AA8" : "#8DCCDB" }]}>
+                                <Text style={styles.dia2}>{horaItem}</Text>
+                            </View>
+                        </TouchableOpacity>
+                    ))}
                 </View>
             </View>
+
             <View>
-                <TouchableOpacity style={styles.button} onPress={onPress}>
+                <TouchableOpacity style={styles.button} onPress={agendarConsulta}>
                     <Text style={styles.buttontext}>Concluir agendamento</Text>
                 </TouchableOpacity>
             </View>
         </ScrollView>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
@@ -248,19 +198,18 @@ const styles = StyleSheet.create({
     },
     box: {
         width: "100%",
-        height: 115
+        height: 200
     },
-    boxdia: {
-        display: "flex",
-        flexDirection: "row",
-        gap: 10,
-        alignItems: "center",
-        justifyContent: "center"
+    box2: {
+        marginTop: 175
     },
     boxdia2: {
+        width: "100%",
         display: "flex",
         flexDirection: "row",
         gap: 20,
+        paddingHorizontal: 20,
+        flexWrap: "wrap",
         alignItems: "center",
         justifyContent: "center"
     },
