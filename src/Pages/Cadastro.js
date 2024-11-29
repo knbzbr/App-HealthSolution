@@ -1,11 +1,8 @@
-import React from 'react'
-import { useState } from "react";
+import React, { useState } from "react";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
-
+import { Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View, Alert } from "react-native";
 
 export default function Cadastro({ setCadastro }) {
-
     const [erro, setErro] = useState("");
     const [nome, setNome] = useState("");
     const [datanascimento, setDatanascimento] = useState("");
@@ -17,69 +14,74 @@ export default function Cadastro({ setCadastro }) {
     const [senha, setSenha] = useState("");
     const [confirmada, setConfirmada] = useState("");
 
-    function Cadastrar() {
+    async function Cadastrar() {
         if (nome == "") {
-            setErro("Campo obrigatório");
+            setErro("nome");
             return;
         }
-
-        if (datanascimento == "") {
-            setErro("Campo obrigatório");
-            return;
-        }
-
-        if (sexo == "") {
-            setErro("Campo obrigatório");
-            return;
-        }
-
         if (cpf == "") {
-            setErro("Campo obrigatório");
+            setErro("cpf");
             return;
         }
-
         if (endereco == "") {
-            setErro("Campo obrigatório");
+            setErro("endereco");
             return;
         }
-
         if (telefone == "") {
-            setErro("Campo obrigatório");
+            setErro("telefone");
             return;
         }
-
         if (email == "") {
-            setErro("Campo obrigatório");
+            setErro("email");
             return;
         }
-
         if (senha == "") {
-            setErro("Campo obrigatório");
+            setErro("senha");
+            return;
+        }
+        if (confirmada != senha) {
+            setErro("confirmada");
             return;
         }
 
-        if (confirmada == "") {
-            setErro("Campo obrigatório");
-            return;
-        }
+        if (nome !== ""   && cpf !== "" && endereco !== "" && telefone !== "" && email !== "" && senha !== "") {
+            Cadastrado();
+                
 
-        if (nome != ""
-            && datanascimento != ""
-            && sexo != ""
-            && cpf != ""
-            && endereco != ""
-            && telefone != ""
-            && email != ""
-            && senha != ""
-            && confirmada != "") {
-            setLogado(true);
-            setConcluido(true);
         }
     }
+
+    async function Cadastrado() {
+        await fetch('http://10.133.22.29:5251/api/Usuario/CreateUsuario', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                usuarioNome: nome,
+                usuarioCpf: cpf,
+                usuarioEndereco: endereco,
+                usuarioTelefone: telefone,
+                usuarioEmail: email,
+                usuarioSenha: senha,
+                fotoUsuario: ""
+            })
+        })
+        .then(res => res.json())
+        .then(json => {
+            setCadastro(true);
+            Alert.alert('Cadastro', 'Seu cadastro foi realizado com sucesso!');
+        })
+        .catch(err => {
+            console.log(err);
+            Alert.alert('Erro', 'Ocorreu um erro ao realizar o cadastro. Tente novamente.');
+        });
+        setCadastro(false);
+    }
+
+
     return (
         <View style={css.view}>
             <Image style={css.logo} source={require('../../assets/LogoHealthSolutions.png')} />
-            <TouchableOpacity onPress={() => setCadastro( false )}>
+            <TouchableOpacity onPress={() => setCadastro(false)}>
                 <MaterialCommunityIcons name="chevron-left" size={30} />
             </TouchableOpacity>
             <ScrollView>
@@ -87,110 +89,74 @@ export default function Cadastro({ setCadastro }) {
                     style={css.inputs}
                     placeholder="Nome Completo"
                     placeholderTextColor="black"
-                    css={{
-                        placeholderStyle: {
-                            fontWeight: "bold",
-                        },
-                    }}
                     onChangeText={(digitado) => setNome(digitado)}
                     value={nome}
                 />
-                {erro && <Text style={css.erro}>{erro}</Text>}
-                <TextInput style={css.inputs} placeholder="Data de Nascimento"
+                {erro === "nome" && <Text style={css.erro}>Campo obrigatório</Text>}
+
+                <TextInput
+                    style={css.inputs}
+                    placeholder="CPF"
                     placeholderTextColor="black"
-                    css={{
-                        placeholderStyle: {
-                            fontWeight: "bold",
-                        },
-                    }}
-                    onChangeText={(digitado) => setDatanascimento(digitado)}
-                    value={datanascimento}
-                />
-                {erro && <Text style={css.erro}>{erro}</Text>}
-                <TextInput style={css.inputs} placeholder="Sexo"
-                    placeholderTextColor="black"
-                    css={{
-                        placeholderStyle: {
-                            fontWeight: "bold",
-                        },
-                    }}
-                    onChangeText={(digitado) => setSexo(digitado)}
-                    value={sexo}
-                />
-                {erro && <Text style={css.erro}>{erro}</Text>}
-                <TextInput style={css.inputs} placeholder="CPF"
-                    placeholderTextColor="black"
-                    css={{
-                        placeholderStyle: {
-                            fontWeight: "bold",
-                        },
-                    }}
                     onChangeText={(digitado) => setCpf(digitado)}
                     value={cpf}
                 />
-                {erro && <Text style={css.erro}>{erro}</Text>}
-                <TextInput style={css.inputs} placeholder="Endereço"
+                {erro === "cpf" && <Text style={css.erro}>Campo obrigatório</Text>}
+
+                <TextInput
+                    style={css.inputs}
+                    placeholder="Endereço"
                     placeholderTextColor="black"
-                    css={{
-                        placeholderStyle: {
-                            fontWeight: "bold",
-                        },
-                    }}
                     onChangeText={(digitado) => setEndereco(digitado)}
                     value={endereco}
                 />
-                {erro && <Text style={css.erro}>{erro}</Text>}
-                <TextInput style={css.inputs} placeholder="Telefone"
+                {erro === "endereco" && <Text style={css.erro}>Campo obrigatório</Text>}
+
+                <TextInput
+                    style={css.inputs}
+                    placeholder="Telefone"
                     placeholderTextColor="black"
-                    css={{
-                        placeholderStyle: {
-                            fontWeight: "bold",
-                        },
-                    }}
                     onChangeText={(digitado) => setTelefone(digitado)}
                     value={telefone}
                 />
-                {erro && <Text style={css.erro}>{erro}</Text>}
-                <TextInput style={css.inputs} placeholder="Email"
+                {erro === "telefone" && <Text style={css.erro}>Campo obrigatório</Text>}
+
+                <TextInput
+                    style={css.inputs}
+                    placeholder="Email"
                     placeholderTextColor="black"
-                    css={{
-                        placeholderStyle: {
-                            fontWeight: "bold",
-                        },
-                    }}
                     onChangeText={(digitado) => setEmail(digitado)}
                     value={email}
                 />
-                {erro && <Text style={css.erro}>{erro}</Text>}
-                <TextInput style={css.inputs} placeholder="Senha" secureTextEntry={true}
+                {erro === "email" && <Text style={css.erro}>Campo obrigatório</Text>}
+
+                <TextInput
+                    style={css.inputs}
+                    placeholder="Senha"
+                    secureTextEntry={true}
                     placeholderTextColor="black"
-                    css={{
-                        placeholderStyle: {
-                            fontWeight: "bold",
-                        },
-                    }}
                     onChangeText={(digitado) => setSenha(digitado)}
                     value={senha}
                 />
-                {erro && <Text style={css.erro}>{erro}</Text>}
-                <TextInput style={css.inputs} placeholder="Confirmar Senha" secureTextEntry={true}
+                {erro === "senha" && <Text style={css.erro}>Campo obrigatório</Text>}
+
+                <TextInput
+                    style={css.inputs}
+                    placeholder="Confirmar Senha"
+                    secureTextEntry={true}
                     placeholderTextColor="black"
-                    css={{
-                        placeholderStyle: {
-                            fontWeight: "bold",
-                        },
-                    }}
                     onChangeText={(digitado) => setConfirmada(digitado)}
                     value={confirmada}
                 />
-                {erro && <Text style={css.erro}>{erro}</Text>}
-                <TouchableOpacity style={css.btn} onPress={setCadastro(true)}>
+                {erro === "confirmada" && <Text style={css.erro}>As senhas não coincidem</Text>}
+
+                <TouchableOpacity style={css.btn} onPress={Cadastrar} >
                     <Text style={css.btnText}>Cadastrar</Text>
                 </TouchableOpacity>
             </ScrollView>
         </View>
-    )
-} 2
+    );
+}
 
 const css = StyleSheet.create({
     view: {
@@ -212,19 +178,12 @@ const css = StyleSheet.create({
         fontSize: 16,
         alignSelf: "center"
     },
-    image: {
-        flex: 1,
-        justifyContent: 'center',
-        width: "100%",
-        height: "100%"
-    },
     logo: {
         width: "100%",
         height: "25%",
         resizeMode: "contain"
     },
     btn: {
-
         width: "80%",
         height: 40,
         color: "white",
@@ -250,4 +209,4 @@ const css = StyleSheet.create({
         marginTop: -15,
         marginLeft: 20
     },
-})
+});

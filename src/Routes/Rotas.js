@@ -53,20 +53,20 @@ export default function Rotas() {
                     }}
                 />
                 <Tab.Screen
-                    name="Consultas"
-                    component={Consultas}
-                    options={{
-                        tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="map" color={color} size={25} />
-                        ),
-                    }}
-                />
-                <Tab.Screen
                     name="Agendamento"
                     component={Agendamento}
                     options={{
                         tabBarIcon: ({ color, size }) => (
                             <MaterialCommunityIcons name="calendar" color={"black"} size={25} />
+                        ),
+                    }}
+                />
+                <Tab.Screen
+                    name="Consultas"
+                    component={Consultas}
+                    options={{
+                        tabBarIcon: ({ color, size }) => (
+                            <MaterialCommunityIcons name="comment-check-outline" color={"black"} size={25} />
                         ),
                     }}
                 />

@@ -61,7 +61,7 @@ export default function Perfil({navigation}) {
             <MaterialCommunityIcons name="pencil" size={20} marginLeft={350} marginTop={-25} />
           </View>
         </View>
-        <TouchableOpacity style={css.caixadois} onPress={() => navigation.navigate ("Consultas")}>
+        <TouchableOpacity style={css.caixadois} onPress={() => navigation.navigate("Consultas")}>
           <Text>Minhas Consultas</Text>
         </TouchableOpacity>
         <TouchableOpacity>
