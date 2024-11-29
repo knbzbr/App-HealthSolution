@@ -52,7 +52,6 @@ export default function Login({setCadastro}) {
                     <Text style={css.btnText}>Login</Text>
                     {error && <Text style={css.text}>Email ou senha incorretos</Text>}
                 </TouchableOpacity>
-
                 <Text style={css.cadastrado}>Não é cadastrado?</Text>
                 <TouchableOpacity onPress={() => Cadastro(true)}>
                     <Text style={css.cadastrar} >Cadastrar</Text>
