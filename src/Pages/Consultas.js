@@ -59,7 +59,7 @@ export default function Consultas({navigation}) {
                 <Animated.View entering={FadeIn}>
                     {
                         consultas && consultas.map((item) =>
-                            <Item item={item} />
+                            <Item item={item} key={item.consultaId}/>
                         )
                     }
                     
