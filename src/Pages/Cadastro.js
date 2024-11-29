@@ -4,7 +4,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
 
-export default function Cadastro({ setLogado, setCadastro, setConcluido, navigation }) {
+export default function Cadastro({ setCadastro }) {
 
     const [erro, setErro] = useState("");
     const [nome, setNome] = useState("");
@@ -73,14 +73,13 @@ export default function Cadastro({ setLogado, setCadastro, setConcluido, navigat
             && senha != ""
             && confirmada != "") {
             setLogado(true);
-            setCadastro(false);
             setConcluido(true);
         }
     }
     return (
         <View style={css.view}>
             <Image style={css.logo} source={require('../../assets/LogoHealthSolutions.png')} />
-            <TouchableOpacity onPress={() => navigation.navigate ("Login")}>
+            <TouchableOpacity onPress={() => setCadastro( false )}>
                 <MaterialCommunityIcons name="chevron-left" size={30} />
             </TouchableOpacity>
             <ScrollView>
@@ -185,7 +184,7 @@ export default function Cadastro({ setLogado, setCadastro, setConcluido, navigat
                     value={confirmada}
                 />
                 {erro && <Text style={css.erro}>{erro}</Text>}
-                <TouchableOpacity style={css.btn} onPress={Cadastrar}>
+                <TouchableOpacity style={css.btn} onPress={setCadastro(true)}>
                     <Text style={css.btnText}>Cadastrar</Text>
                 </TouchableOpacity>
             </ScrollView>

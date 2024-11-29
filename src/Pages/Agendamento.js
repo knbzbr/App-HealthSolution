@@ -10,15 +10,11 @@ export default function Agendamento() {
     const [tipoProfissionais, setTipoProfissionais] = useState([]);
     const [hora, setHora] = useState(null);
     const [selectedStartDate, setSelectedStartDate] = useState(null);
-    const [obsConsulta, setObsConsulta ] = useState();
+    const [obsConsulta, setObsConsulta] = useState();
 
     const horarios1 = ["08:00", "09:00", "10:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"];
 
     const { usuario } = useContext(AuthContext);
-
-    const onPress = () => {
-        Alert.alert('Agendamento', 'Seu agendamento foi concluído com sucesso!');
-    };
 
     async function getProfissionais() {
         try {
@@ -62,6 +58,7 @@ export default function Agendamento() {
             .then(json => console.log(json))
             .catch(err => console.log(err))
 
+        Alert.alert('Agendamento', 'Seu agendamento foi concluído com sucesso!');
     }
 
     useEffect(() => {
@@ -76,7 +73,7 @@ export default function Agendamento() {
     const Item = ({ imagem, title, subtitulo, id }) => (
         <TouchableOpacity
             style={[styles.item, { backgroundColor: profissional === id ? "#0B8AA8" : "#8DCCDB" }]}
-            onPress={() => { setProfissional(id); setObsConsulta( title + " - " + subtitulo )}}
+            onPress={() => { setProfissional(id); setObsConsulta(title + " - " + subtitulo) }}
         >
             <Image source={imagem} resizeMode="cover" style={styles.image} />
             <View style={styles.textbox}>
