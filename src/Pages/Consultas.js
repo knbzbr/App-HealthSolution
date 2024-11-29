@@ -1,24 +1,28 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { View, StyleSheet, Text, TouchableOpacity, FlatList, ScrollView } from 'react-native'
-import Animated, { BounceIn, BounceInUp, BounceOutUp, FadeIn, FadeInUp, FadeOut, FadeOutUp } from 'react-native-reanimated';
-
+import { View, StyleSheet, Text, TouchableOpacity, ScrollView } from 'react-native'
+import Animated, { FadeIn } from 'react-native-reanimated';
+import { AuthContext } from '../Context/AuthContext';
+import moment from 'moment';
+import 'moment/locale/pt-br';
 
 const Item = ({ item }) => (
     <View style={styles.item} key={item.consultaId}>
-        <Text style={styles.title}>{item.consultaId} - {item.dataConsulta} </Text>
+        <Text style={styles.title}>{item.obsConsulta} - {moment(item.dataConsulta).format('DD/MM/YYYY HH:mm')} </Text>
     </View>
 );
 
 
-export default function Consultas() {
+export default function Consultas({navigation}) {
 
     const [showConsultas, SetShowConsultas] = useState();
     const [consultas, setConsultas ] = useState();
 
+    const {usuario} = useContext( AuthContext );
+
     async function getConsultas()
     {
-        await fetch('http://10.133.22.9:5251/api/Consulta/GetAllConsulta', {
+        await fetch('http://10.133.22.15:5251/api/Consulta/GetAllConsulta', {
             method: 'GET',
             headers: {
                 'content-type': 'application/json'
@@ -26,7 +30,7 @@ export default function Consultas() {
         })
             .then(res => res.json() )
             .then(json => {
-                const filtro = json.filter( value => value.pacienteId == 1 );
+                const filtro = json.filter( value => value.pacienteId == usuario.usuarioId );
                 setConsultas( filtro );
             }
             )
@@ -42,8 +46,8 @@ export default function Consultas() {
     return (
         <ScrollView contentContainerStyle={styles.container}>
             <View style={styles.info} >
-                <TouchableOpacity style={styles.Voltar}>
-                    <MaterialCommunityIcons name="chevron-left" size={30} />
+                <TouchableOpacity style={styles.Voltar} onPress={() => navigation.navigate( "Home" )}>
+                    <MaterialCommunityIcons name="chevron-left" size={35} />
                     <Text style={styles.text} >Minhas Consultas:</Text>
                 </TouchableOpacity>
             </View>
@@ -54,10 +58,14 @@ export default function Consultas() {
             {showConsultas &&
                 <Animated.View entering={FadeIn}>
                     {
-                        consultas.map((item) =>
-                            <Item item={item} />
+                        consultas && consultas.map((item) =>
+                            <Item item={item} key={item.consultaId}/>
                         )
                     }
+                    
+                    {showConsultas && consultas.length === 0 && ( 
+                        <Text style={styles.noConsultasText}>Nenhuma consulta encontrada.</Text>
+                    )}
                 </Animated.View>
             }
            
@@ -108,7 +116,7 @@ const styles = StyleSheet.create({
     },
     titulo: {
         color: "black",
-        fontSize: 16,
+        fontSize: 17,
         marginLeft: 15,
         marginTop: 18,
         marginBottom: 10,
@@ -127,8 +135,11 @@ const styles = StyleSheet.create({
         display: "flex",
         flexDirection: "row"
     },
-
-
+    noConsultasText: {
+        color: 'black',
+        textAlign: 'center',
+        marginTop: 20,
+        fontSize: 16,
+    },
 
 })
-

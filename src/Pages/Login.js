@@ -2,19 +2,26 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Image, ImageBackground, Keyboard, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import Home from '../Pages/Home';
 import { AuthContext } from '../Context/AuthContext';
+import { useNavigation } from '@react-navigation/native';
+import Cadastro from './Cadastro';
 
-
-export default function Login({setCadastro, navigation}) {
+export default function Login({setCadastro}) {
 
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
 
     const { Login, error } = useContext( AuthContext );
 
-
     function handleLogin() {
         Login(email, senha);
     }
+
+    function Cadastro() 
+    {
+        setCadastro(true);
+    }
+    
+ 
 
     return (
         <View style={css.view}>
@@ -29,7 +36,9 @@ export default function Login({setCadastro, navigation}) {
                             fontWeight: "bold",
                         },
                     }}
-                    style={css.inputs} onChangeText={(digitado) => setEmail(digitado)} value={email}
+                    style={css.inputs} 
+                    onChangeText={(digitado) => setEmail(digitado)} 
+                    value={email}
                 />
                 <TextInput secureTextEntry={true} placeholder="Senha"
                     placeholderTextColor="black"
@@ -38,16 +47,17 @@ export default function Login({setCadastro, navigation}) {
                             fontWeight: "bold",
                         },
                     }}
-                    style={css.inputs} onChangeText={(digitado) => setSenha(digitado)} value={senha} 
+                    style={css.inputs} 
+                    onChangeText={(digitado) => setSenha(digitado)} 
+                    value={senha} 
                 />
                 <Text style={css.senha}>Esqueci minha senha</Text>
                 <TouchableOpacity onPress={handleLogin} style={css.btn} >
                     <Text style={css.btnText}>Login</Text>
-                    {error && <Text style={css.text}>Email ou senha incorretos</Text>}
                 </TouchableOpacity>
-
+                {error && <Text style={css.text}>Email ou senha incorretos</Text>}
                 <Text style={css.cadastrado}>Não é cadastrado?</Text>
-                <TouchableOpacity onPress={() => navigation.navigator("Cadastro")}>
+                <TouchableOpacity onPress={() => Cadastro(true)}>
                     <Text style={css.cadastrar} >Cadastrar</Text>
                 </TouchableOpacity>      
                     
@@ -64,7 +74,7 @@ const css = StyleSheet.create({
     inputs: {
         borderRadius: 5,
         backgroundColor: 'white',
-        width: '85%',
+        width: "85%",
         height: 50,
         padding: 10,
         marginTop: 15,
