@@ -18,7 +18,7 @@ export default function Consultas() {
 
     async function getConsultas()
     {
-        await fetch('http://10.133.22.9:5251/api/Consulta/GetAllConsulta', {
+        await fetch('http://10.133.22.29:5251/api/Consulta/GetAllConsulta', {
             method: 'GET',
             headers: {
                 'content-type': 'application/json'
