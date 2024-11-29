@@ -22,7 +22,7 @@ export default function Agendamento() {
 
     async function getProfissionais() {
         try {
-            const response = await fetch('http://10.133.22.23:5251/api/Profissional/GetAllProfissional', {
+            const response = await fetch('http://10.133.22.39:5251/api/Profissional/GetAllProfissional', {
                 method: 'GET',
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -35,7 +35,7 @@ export default function Agendamento() {
 
     async function getTipoProfissionais() {
         try {
-            const response = await fetch('http://10.133.22.23:5251/api/TipoProfissional/GetAllTipoProfissional', {
+            const response = await fetch('http://10.133.22.39:5251/api/TipoProfissional/GetAllTipoProfissional', {
                 method: 'GET',
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -48,7 +48,7 @@ export default function Agendamento() {
 
     async function agendarConsulta() {
         console.log(selectedStartDate + "T" + hora + ":00Z");
-        await fetch('http://10.133.22.23:5251/api/Consulta/CreateConsulta', {
+        await fetch('http://10.133.22.39:5251/api/Consulta/CreateConsulta', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
