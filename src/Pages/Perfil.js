@@ -10,7 +10,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 //const [telefone, setTelefone] = useState("");
 //const [email, setEmail] = useState("");
 
-export default function Perfil() {
+export default function Perfil({navigation}) {
   return (
     <ScrollView>
       <View style={css.container}>
@@ -19,10 +19,10 @@ export default function Perfil() {
         </View>
         <View style={css.caixaiconeum}>
           <View style={css.msginicial}>
-            <Text>Olá,Kauan e Vitor!</Text>
+            <Text>Olá, Kauan</Text>
           </View>
           <View>
-            <MaterialCommunityIcons name="pencil" size={20} marginLeft={260} marginTop={-20} />
+            <MaterialCommunityIcons name="pencil" size={20} marginLeft={250} marginTop={-20} />
           </View>
         </View>
         <View>
@@ -61,12 +61,12 @@ export default function Perfil() {
             <MaterialCommunityIcons name="pencil" size={20} marginLeft={350} marginTop={-25} />
           </View>
         </View>
-        <View style={css.caixadois}>
+        <TouchableOpacity style={css.caixadois} onPress={() => navigation.navigate ("Consultas")}>
           <Text>Minhas Consultas</Text>
-        </View>
-        <View>
-          <MaterialCommunityIcons name="clipboard-check-multiple" size={25} marginTop={-25} marginLeft={25} />
-        </View>
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <MaterialCommunityIcons name="clipboard-check-multiple" size={25} marginTop={-25} marginLeft={25} onPress={() => navigation.navigate ("Consultas")}/>
+        </TouchableOpacity>
         <View style={css.caixatres}>
           <Text>Configurações</Text>
         </View>
@@ -96,6 +96,9 @@ export default function Perfil() {
 }
 
 const css = StyleSheet.create({
+  container:{
+    textAlign:"center"
+  },
   fotoperfil: {
     width: 100,
     height: 100,
@@ -103,8 +106,8 @@ const css = StyleSheet.create({
     marginTop: 60
   },
   msginicial: {
-    marginLeft: 140,
-    marginTop: 10
+    marginLeft: 165,
+    marginTop: 15
   },
   input: {
     width: "85%",
@@ -115,6 +118,10 @@ const css = StyleSheet.create({
     marginTop: 20,
     padding: 4
 
+  },
+  caixaiconeum: {
+    textAlign:"center",
+    justifyContent:"center"
   },
   caixadois: {
     marginLeft: 55,

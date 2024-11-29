@@ -23,12 +23,12 @@ export default function Rotas() {
     const { logado } = useContext(AuthContext);
     const [cadastro, setCadastro] = useState(false);
 
-    if (!logado && !cadastro ) {
-      return (<Login/>)
+    if (!logado && !cadastro) {
+        return (<Login setCadastro={setCadastro} />)
     }
 
-    if( !logado && cadastro ) {
-        return ( <Cadastro/> )
+    if (!logado && cadastro) {
+        return (<Cadastro setCadastro={setCadastro} />)
     }
 
     return (
@@ -49,15 +49,6 @@ export default function Rotas() {
                     options={{
                         tabBarIcon: ({ color, size }) => (
                             <MaterialCommunityIcons name="home-outline" color={"black"} size={35} />
-                        ),
-                    }}
-                />
-                <Tab.Screen
-                    name="Cadastro"
-                    component={Cadastro}
-                    options={{
-                        tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="home" color={color} size={size} />
                         ),
                     }}
                 />

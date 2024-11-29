@@ -3,23 +3,25 @@ import { Image, ImageBackground, Keyboard, StyleSheet, Text, TextInput, Touchabl
 import Home from '../Pages/Home';
 import { AuthContext } from '../Context/AuthContext';
 import { useNavigation } from '@react-navigation/native';
+import Cadastro from './Cadastro';
 
-
-export default function Login({setCadastro, navigation}) {
+export default function Login({setCadastro}) {
 
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
 
     const { Login, error } = useContext( AuthContext );
 
-
     function handleLogin() {
         Login(email, senha);
     }
-     
-    function btn(){
-        const navigation = useNavigation();
+
+    function Cadastro() 
+    {
+        setCadastro(true);
     }
+    
+ 
 
     return (
         <View style={css.view}>
@@ -51,7 +53,7 @@ export default function Login({setCadastro, navigation}) {
                     {error && <Text style={css.text}>Email ou senha incorretos</Text>}
                 </TouchableOpacity>
                 <Text style={css.cadastrado}>Não é cadastrado?</Text>
-                <TouchableOpacity onPress={() => navigation.navigate("Cadastro")}>
+                <TouchableOpacity onPress={() => Cadastro(true)}>
                     <Text style={css.cadastrar} >Cadastrar</Text>
                 </TouchableOpacity>      
                     
@@ -68,7 +70,7 @@ const css = StyleSheet.create({
     inputs: {
         borderRadius: 5,
         backgroundColor: 'white',
-        width: '85%',
+        width: "85%",
         height: 50,
         padding: 10,
         marginTop: 15,
