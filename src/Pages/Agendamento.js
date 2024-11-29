@@ -43,7 +43,6 @@ export default function Agendamento() {
     }
 
     async function agendarConsulta() {
-        console.log(selectedStartDate + "T" + hora + ":00Z");
         await fetch('http://10.133.22.29:5251/api/Consulta/CreateConsulta', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
