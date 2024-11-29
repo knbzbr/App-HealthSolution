@@ -19,10 +19,10 @@ export default function Perfil({navigation}) {
         </View>
         <View style={css.caixaiconeum}>
           <View style={css.msginicial}>
-            <Text>Olá,Kauan e Vitor!</Text>
+            <Text>Olá, Kauan</Text>
           </View>
           <View>
-            <MaterialCommunityIcons name="pencil" size={20} marginLeft={260} marginTop={-20} />
+            <MaterialCommunityIcons name="pencil" size={20} marginLeft={250} marginTop={-20} />
           </View>
         </View>
         <View>
@@ -96,6 +96,9 @@ export default function Perfil({navigation}) {
 }
 
 const css = StyleSheet.create({
+  container:{
+    textAlign:"center"
+  },
   fotoperfil: {
     width: 100,
     height: 100,
@@ -103,8 +106,8 @@ const css = StyleSheet.create({
     marginTop: 60
   },
   msginicial: {
-    marginLeft: 140,
-    marginTop: 10
+    marginLeft: 165,
+    marginTop: 15
   },
   input: {
     width: "85%",
@@ -115,6 +118,10 @@ const css = StyleSheet.create({
     marginTop: 20,
     padding: 4
 
+  },
+  caixaiconeum: {
+    textAlign:"center",
+    justifyContent:"center"
   },
   caixadois: {
     marginLeft: 55,
