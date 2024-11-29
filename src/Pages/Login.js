@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Image, ImageBackground, Keyboard, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import Home from '../Pages/Home';
 import { AuthContext } from '../Context/AuthContext';
+import { useNavigation } from '@react-navigation/native';
 
 
 export default function Login({setCadastro, navigation}) {
@@ -14,6 +15,10 @@ export default function Login({setCadastro, navigation}) {
 
     function handleLogin() {
         Login(email, senha);
+    }
+     
+    function btn(){
+        const navigation = useNavigation();
     }
 
     return (
@@ -46,7 +51,7 @@ export default function Login({setCadastro, navigation}) {
                     {error && <Text style={css.text}>Email ou senha incorretos</Text>}
                 </TouchableOpacity>
                 <Text style={css.cadastrado}>Não é cadastrado?</Text>
-                <TouchableOpacity onPress={() => navigation.navigator("Cadastro")}>
+                <TouchableOpacity onPress={() => navigation.navigate("Cadastro")}>
                     <Text style={css.cadastrar} >Cadastrar</Text>
                 </TouchableOpacity>      
                     

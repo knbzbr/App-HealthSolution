@@ -77,14 +77,10 @@ export default function Cadastro({ setLogado, setCadastro, setConcluido, navigat
             setConcluido(true);
         }
     }
-    function Voltar() {
-        setLogado(false);
-        setCadastro(false);
-    }
     return (
         <View style={css.view}>
             <Image style={css.logo} source={require('../../assets/LogoHealthSolutions.png')} />
-            <TouchableOpacity onPress={() => navigation.navigate( "Home" )}>
+            <TouchableOpacity onPress={() => navigation.navigate ("Login")}>
                 <MaterialCommunityIcons name="chevron-left" size={30} />
             </TouchableOpacity>
             <ScrollView>
