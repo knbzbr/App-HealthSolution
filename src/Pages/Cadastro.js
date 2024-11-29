@@ -15,7 +15,6 @@ export default function Cadastro({ setCadastro }) {
     const [confirmada, setConfirmada] = useState("");
 
     async function Cadastrar() {
-        // Validações de campos obrigatórios
         if (nome == "") {
             setErro("nome");
             return;
@@ -45,7 +44,6 @@ export default function Cadastro({ setCadastro }) {
             return;
         }
 
-        // Se todos os campos estiverem preenchidos corretamente, chama a função para realizar o cadastro
         if (nome !== ""   && cpf !== "" && endereco !== "" && telefone !== "" && email !== "" && senha !== "") {
             Cadastrado();
                 
@@ -54,7 +52,7 @@ export default function Cadastro({ setCadastro }) {
     }
 
     async function Cadastrado() {
-        await fetch('http://10.133.22.39:5251/api/Usuario/CreateUsuario', {
+        await fetch('http://10.133.22.29:5251/api/Usuario/CreateUsuario', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

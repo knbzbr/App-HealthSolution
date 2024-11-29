@@ -66,7 +66,7 @@ export default function Rotas() {
                     component={Consultas}
                     options={{
                         tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="comment-check" color={"black"} size={25} />
+                            <MaterialCommunityIcons name="comment-check-outline" color={"black"} size={25} />
                         ),
                     }}
                 />
