@@ -10,7 +10,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 //const [telefone, setTelefone] = useState("");
 //const [email, setEmail] = useState("");
 
-export default function Perfil() {
+export default function Perfil({navigation}) {
   return (
     <ScrollView>
       <View style={css.container}>
@@ -61,12 +61,12 @@ export default function Perfil() {
             <MaterialCommunityIcons name="pencil" size={20} marginLeft={350} marginTop={-25} />
           </View>
         </View>
-        <View style={css.caixadois}>
+        <TouchableOpacity style={css.caixadois} onPress={() => navigation.navigate ("Consultas")}>
           <Text>Minhas Consultas</Text>
-        </View>
-        <View>
-          <MaterialCommunityIcons name="clipboard-check-multiple" size={25} marginTop={-25} marginLeft={25} />
-        </View>
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <MaterialCommunityIcons name="clipboard-check-multiple" size={25} marginTop={-25} marginLeft={25} onPress={() => navigation.navigate ("Consultas")}/>
+        </TouchableOpacity>
         <View style={css.caixatres}>
           <Text>Configurações</Text>
         </View>

@@ -11,7 +11,7 @@ const Item = ({ item }) => (
 );
 
 
-export default function Consultas() {
+export default function Consultas({navigation}) {
 
     const [showConsultas, SetShowConsultas] = useState();
     const [consultas, setConsultas ] = useState();
@@ -42,8 +42,8 @@ export default function Consultas() {
     return (
         <ScrollView contentContainerStyle={styles.container}>
             <View style={styles.info} >
-                <TouchableOpacity style={styles.Voltar}>
-                    <MaterialCommunityIcons name="chevron-left" size={30} />
+                <TouchableOpacity style={styles.Voltar} onPress={() => navigation.navigate( "Home" )}>
+                    <MaterialCommunityIcons name="chevron-left" size={35} />
                     <Text style={styles.text} >Minhas Consultas:</Text>
                 </TouchableOpacity>
             </View>
