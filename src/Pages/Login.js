@@ -36,7 +36,9 @@ export default function Login({setCadastro}) {
                             fontWeight: "bold",
                         },
                     }}
-                    style={css.inputs} onChangeText={(digitado) => setEmail(digitado)} value={email}
+                    style={css.inputs} 
+                    onChangeText={(digitado) => setEmail(digitado)} 
+                    value={email}
                 />
                 <TextInput secureTextEntry={true} placeholder="Senha"
                     placeholderTextColor="black"
@@ -45,13 +47,15 @@ export default function Login({setCadastro}) {
                             fontWeight: "bold",
                         },
                     }}
-                    style={css.inputs} onChangeText={(digitado) => setSenha(digitado)} value={senha} 
+                    style={css.inputs} 
+                    onChangeText={(digitado) => setSenha(digitado)} 
+                    value={senha} 
                 />
                 <Text style={css.senha}>Esqueci minha senha</Text>
                 <TouchableOpacity onPress={handleLogin} style={css.btn} >
                     <Text style={css.btnText}>Login</Text>
-                    {error && <Text style={css.text}>Email ou senha incorretos</Text>}
                 </TouchableOpacity>
+                {error && <Text style={css.text}>Email ou senha incorretos</Text>}
                 <Text style={css.cadastrado}>Não é cadastrado?</Text>
                 <TouchableOpacity onPress={() => Cadastro(true)}>
                     <Text style={css.cadastrar} >Cadastrar</Text>
