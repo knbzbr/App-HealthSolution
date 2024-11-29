@@ -5,6 +5,7 @@ export const AuthContext = createContext(0);
 function AuthProvider({ children }) {
     const [logado, setLogado] = useState(false);
     const [error, setError] = useState(false);
+    const [usuario, setUsuario] = useState();
 
     async function Login(email, senha) {
 
@@ -21,13 +22,11 @@ function AuthProvider({ children }) {
             })
                 .then(res => res.json() )
                 .then(json => {
-                    if( json.usuarioId ) {
+                    if( json.usuarioId > 0 ) {
+                        setUsuario( json );
                         setLogado(true);
                         setError(false);
-                    } else {
-                        setError( true );
                     }
-
                 }
                 )
                 .catch(err => setError(true))
@@ -37,7 +36,7 @@ function AuthProvider({ children }) {
     }
 
     return (
-        <AuthContext.Provider value={{ logado: logado, Login, error: error }}>
+        <AuthContext.Provider value={{ logado: logado, Login, error: error,usuario: usuario }}>
             {children}
         </AuthContext.Provider>
     )

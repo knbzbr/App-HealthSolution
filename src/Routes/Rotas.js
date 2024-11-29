@@ -16,12 +16,12 @@ import Cadastro from '../Pages/Cadastro';
 
 
 
-    const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 
 export default function Rotas() {
 
     const { logado } = useContext(AuthContext);
-    const [ cadastro, setCadastro ] = useState(false);
+    const [cadastro, setCadastro] = useState(false);
 
     if (!logado && !cadastro ) {
       return (<Login/>)
@@ -79,7 +79,7 @@ export default function Rotas() {
                         ),
                     }}
                 />
-                  <Tab.Screen
+                <Tab.Screen
                     name="Perfil"
                     component={Perfil}
                     options={{
